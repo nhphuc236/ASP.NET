@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+
+
+    @*<link href="~/Content/bootstrap.css" rel="stylesheet" />*@
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/DevExetemeCss/dx.common.css" rel="stylesheet" />
+    <link href="~/Content/DevExetemeCss/dx.softblue.compact.css" rel="stylesheet" />
+    <link href="~/Content/Toastr/toastr.css" rel="stylesheet" />
+    <link href="~/Content/ConfirmCss/jquery-confirm.min.css" rel="stylesheet" />
+    <link href="~/Content/common.css" rel="stylesheet" />
+    
+</head>
+<body>
+
+    @*<script src="~/Scripts/jquery.min.js"></script>*@
+    <script src="~/Scripts/jquery.js"></script>
+    <script src="~/Scripts/ConfirmJs/jquery-confirm.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/DevExtremeJs/jszip.min.js"></script>
+    <script src="~/Scripts/DevExtremeJs/dx.all.js"></script>
+    <script src="~/Scripts/DevExtremeJs/Localization/dx.messages.vi.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.js"></script>
+    <script src="~/Scripts/common.js"></script>
+    <script src="~/Scripts/toastr.min.js"></script>
+    @RenderSection("scripts", required: false);
+    <div class="form">
+        <div id="menu"></div>
+
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    </div>
+
+    <script>
+        var urlTaoDuaAn = '@Html.Raw(Url.Action("TaoDuAn", "DuAn"))';
+        var urlToTrinh = '@Html.Raw(Url.Action("ToTrinh", "DuAn"))';
+        var urlDanhSachDuAnSo4T = '@Html.Raw(Url.Action("DanhSachDuAn_So4T", "DuAn"))';
+        var urlDanhSachDuAnQHSBN = '@Html.Raw(Url.Action("DanhSachDuAn_QHSBN", "DuAn"))';
+        var urlDashboard = '@Html.Raw(Url.Action("Index", "TrangChu"))';
+        var urlTinhChatDuAn = '@Html.Raw(Url.Action("TinhChatDuAn", "DMTinhChatDuAn"))';
+        var urlPhanLoaiDuAn = '@Html.Raw(Url.Action("PhanLoaiDuAn", "DMPhanLoaiDuAn"))';
+        var urlDanhSachTiepNhan = '@Html.Raw(Url.Action("DanhSach", "TiepNhan"))';
+        var urlTiepNhanHoSo = '@Html.Raw(Url.Action("TiepNhanHoSo", "TiepNhan"))';
+        var urlSTCTongHop = '@Html.Raw(Url.Action("STCTongHop", "TongHop"))';
+        var urlDeXuatNhuCau = '@Html.Raw(Url.Action("DeXuatNhuCau", "DuAnChuyenTiep"))';
+
+        const danhSachDuAnMenu = [
+            { id: '1_4_1', name: 'QH-SBN' },
+            { id: '1_4_2', name: 'Sở 4T' },
+            { id: '1_4_3', name: 'UBND' },
+            {id:'1_4_4', name: 'Sở TC'}
+        ]
+
+        const menuData = [
+            { id: '1', name: 'Dự án mới', items: [{ id: '1_1', name: 'Dashboard' }, { id: '1_2', name: 'Tạo dự án mới' }, { id: '1_3', name: 'Tờ trình' }, { id: '1_4', name: 'Danh sách dự án', items: danhSachDuAnMenu }]},
+            { id: '2', name: 'Dự án chuyển tiếp', items: [{ id: '2_1', name: 'Dashboard' }, { id: '2_2', name: 'Đề xuất nhu cầu' }, { id: '2_3', name: 'Xem xét đề xuất' }, { id: '2_4', name: 'Danh sách dự án' }, { id: '2_5', name: 'Tờ trình' }, { id: '2_5', name: 'Trao đổi ý kiến' }] },
+            { id: '3', name: 'Tiếp nhận', items: [{ id: '3_1', name: 'Danh sách' }, { id: '3_2', name: 'Tiếp nhận hồ sơ' }] },
+            { id: '4', name: 'Tổng hợp', items: [{ id: '4_1', name: 'S4T tổng hợp' }, { id: '4_2', name: 'STC tổng hợp' }, { id: '4_3', name: 'UBND chấp thuận' }, {id: '4_4', name: 'UBND quyết định'}] },
+            { id: '5', name: 'Tra cứu', items: [{ id: '5_1', name: 'x' }, { id: '5_2', name: 'x' }, { id: '5_3', name: 'x' }] },
+            { id: '6', name: 'Báo cáo', items: [{ id: '6_1', name: 'x' }, { id: '6_2', name: 'x' }, { id: '6_3', name: 'x' }] },
+            { id: '7', name: 'Quản trị doanh mục', items: [{ id: '7_1', name: 'Tính chất dự án' }, { id: '7_2', name: 'Phân loại dự án' }] },
+            { id: '8', name: 'Quản trị hệ thống', items: [{ id: '8_1', name: 'x' }, { id: '8_2', name: 'x' }, { id: '8_3', name: 'x' }] }
+        ];
+
+        //-----------------------------------------------------
+        function InitExtremeMenu() {
+
+            const dxMenu = $('#menu').dxMenu({
+                dataSource: menuData,
+                hideSubmenuOnMouseLeave: false,
+                displayExpr: 'name',
+                onItemClick(data) {
+
+                    const item = data.itemData;
+                    console.log(item.id);
+                    switch (item.id) {
+                        case '1_1':
+                            window.location.href = urlDashboard;
+                            break;
+                        case '1_2':
+                            window.location.href = urlTaoDuaAn;
+                            break;
+                        case '1_3':
+                            window.location.href = urlToTrinh;
+                            break;
+                        case '1_4_2':
+                            window.location.href = urlDanhSachDuAnSo4T;
+                            break;
+                        case '1_4_1':
+                            window.location.href = urlDanhSachDuAnQHSBN;
+                            break;
+                        case '2_2':
+                            window.location.href = urlDeXuatNhuCau;
+                            break;
+                        case '3_1':
+                            window.location.href = urlDanhSachTiepNhan;
+                            break;
+                        case '3_2':
+                            window.location.href = urlTiepNhanHoSo;
+                            break;
+                        case '4_2':
+                            window.location.href = urlSTCTongHop;
+                            break;
+                        case '7_1':
+                            window.location.href = urlTinhChatDuAn;
+                            break;
+                        case '7_2':
+                            window.location.href = urlPhanLoaiDuAn;
+                            break;
+                    };
+                },
+            }).dxMenu('instance');
+
+        }
+
+        //-----------------------------------------------------
+        $(document).ready(function () {
+            InitExtremeMenu();
+        })
+
+    </script>
+
+</body>
+</html>

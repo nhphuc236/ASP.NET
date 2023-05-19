@@ -1,0 +1,644 @@
+﻿<style>
+    label {
+        text-align: left !important;
+    }
+</style>
+
+<div class="panel panel-primary">
+    <div class="col-md-12">
+        <h1 class="TitleModule">
+            DANH SÁCH DỰ ÁN
+        </h1>
+    </div>
+
+    <div class="panel-body">
+        <div class="form-horizontal">
+            <div class="col-md-12">
+                <div class="col-md-12">
+
+                    <div class="col-md-12">
+                        <label class="control-label col-md-2">Chủ đầu tư</label>
+                        <div class="col-md-4">
+                            <div id="selectChuDauTu"></div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <label class="control-label col-md-12">Tên dự án</label>
+                        </div>
+                        <div class="col-md-4">
+                            <div id="txtTenDuAn"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="control-label col-md-2">Thời gian thực hiện</label>
+                        <div class="col-md-4">
+                            <div id="txtThoiGianThucHien"></div>
+                        </div>
+                        <div class="col-md-6" style="text-align: right; margin-top:10px;">
+                            <a>
+                                <img src="~/Images/save2.png" />
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12" style="text-align:center">
+                        <a class="btn btn-default">
+                            <img src="~/Images/search.png" />
+                            Tìm kiếm
+                        </a>
+                    </div>
+
+                    <!--Tab Panel-->
+                    <div class="col-md-12" style="margin-top: 20px;">
+                        <div id="tabpanel">
+                            <div data-options="dxItem: { title: 'Đang xử lý' } ">
+
+                                <!--Tab 1-->
+
+                                <div id="gridContainer1"></div>
+                            </div>
+
+
+
+                            <div data-options="dxItem: { title: 'Đã xử lý' } ">
+
+                                <!--Tab 2-->
+
+                                <div id="gridContainer2"></div>
+
+                                <!--Pop up-->
+
+
+                                <div id="popUpChoYKien" style="display: none;" class="form-horizontal">
+                                    <div id="scrollview">
+                                        <div class="panel panel-primary">
+                                            <h2 class="TitleModule">Cho Ý Kiến</h2>
+                                            <div class="panel-body">
+                                                <div class="form-horizontal">
+
+
+                                                    <div class="col-md-12">
+
+
+                                                        <div class="col-md-12">
+                                                            <label class="control-label col-md-2 required">Chủ đầu tư</label>
+                                                            <div class="col-md-4">
+                                                                <div id="txtPopUpChuDauTu"></div>
+                                                            </div>
+                                                            <label class="control-label col-md-2 required">Mã dự án</label>
+                                                            <div class="col-md-4">
+                                                                <div id="txtPopUpMaDuAn"></div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <label class="control-label col-md-2 required">Tên dự án</label>
+                                                            <div class="col-md-10">
+                                                                <div id="txtPopUpTenDuAn"></div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <label class="control-label col-md-2 required">Nội dung ý kiến</label>
+                                                            <div class="col-md-10">
+                                                                <div id="txtPopUpNoiDungYKien"></div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-12" style="margin-top: 10px;">
+                                                            <label class="col-md-2 control-label">File đính kèm</label>
+                                                            <div class="col-md-4">
+                                                                <div id="txtPopUpFileDinhKem"></div>
+                                                            </div>
+
+                                                            <div class="col-md-2">
+                                                                <a class="btn btn-default btn_w">
+                                                                    Đính kèm
+                                                                </a>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-12" style="margin-top: 20px;">
+                                                            <div class="col-md-10 col-md-offset-1">
+                                                                <div id="gridFileContainer"></div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-12" style="text-align: center; margin-top: 20px;">
+                                                            <ul>
+                                                                <li style="display:inline; margin-right: 10px">
+                                                                    <a class="btn btn-default btn_w">
+                                                                        <img src="~/Images/save1.png" />
+                                                                        Lưu
+                                                                    </a>
+                                                                </li>
+                                                                <li style="display: inline; margin-right: 10px">
+                                                                    <a class="btn btn-default btn_w" onclick="HidePopup()">
+                                                                        <img src="~/Images/previous.png" />
+                                                                        Trở về
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+
+                                                    </div>
+
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    var urlChiTiet = '@Html.Raw(Url.Action("TaoDuAn", "DuAn"))';
+    const View = (Id) => window.location.href = urlChiTiet + "?view=" + Id;
+
+
+
+        const _arrChuDauTu = ['Option 1', 'Option 2', 'Option 3'];
+        const _arrTrangThaiDaXuLy = ['Chuyển xử lý', 'Cho ý kiến', 'Đã tổng hợp'];
+        const _arrTrangThaiDangXuLy = ['x', 'x', 'x'];
+
+    var data1 = [
+        { id: 1, name: "DuAn1", content: "...", date: "...", total: "....",},
+        { id: 2, name: "DuAn2", content: "...", date: "...", total: "....",}
+    ];
+
+    var data2 = [
+        { id: 3, name: "DuAn3", content: "...", date: "...", total: "...."},
+        { id: 4, name: "DuAn4", content: "...", date: "...", total: "....", }
+    ];
+
+
+
+    //-----------------------------------------
+    function InitExtreme() {
+        $('#selectChuDauTu').dxSelectBox({
+            placeholder: 'Chọn chủ đầu tư...',
+            items: _arrChuDauTu,
+        })
+
+        $('#txtTenDuAn').dxTextBox({}).dxTextBox('instance')
+
+        $('#txtThoiGianThucHien').dxTextBox({}).dxTextBox('instance')
+
+
+        $('#tabpanel').dxTabPanel({
+            deferRendering: false,
+            height: 260,
+            selectedIndex: 0,
+        }).dxTabPanel('instance');
+
+        //-------------------------Tab 1-------------------------------
+        $("#gridContainer1").dxDataGrid({
+            dataSource: data1,
+            showBorders: true,
+            showColumnLines: true,
+            wordWrapEnabled: true,
+            showRowLines: true,
+            remoteOperations: {
+                filtering: true,
+                paging: true,
+                sorting: false,
+                groupPaging: false,
+                grouping: false,
+                summary: true
+            },
+            selection: {
+                mode: 'single',
+                showCheckBoxesMode: 'always',
+                selectAllMode: 'page',
+            },
+            grouping: {
+                autoExpandAll: true,
+            },
+            columns: [
+                {
+                    caption: 'Stt',
+                    width: '5%',
+                    alignment: 'center',
+                    dataField: 'id',
+                },
+                {
+                    caption: 'Tên dự án',
+                    width: '20%',
+                    alignment: 'left',
+                    dataField: 'name',
+                },
+                {
+                    caption: 'Nội dung và quy mô',
+                    width: '30%',
+                    alignment: 'left',
+                    dataField: 'content',
+                },
+                {
+                    caption: 'Thời gian thực hiện',
+                    width: '10%',
+                    alignment: 'left',
+                    dataField: 'date',
+                },
+                {
+                    caption: 'Tổng mức đầu tư',
+                    width: '15%',
+                    alignment: 'left',
+                    dataField: 'total',
+                },
+                {
+                    caption: 'Trạng thái',
+                    width: '15%',
+                    alignment: 'left',
+                    cellTemplate: function (container, options) {
+                        $("<div>").dxSelectBox({
+                            placeholder: 'Nhập nội dung...',
+                            items: _arrTrangThaiDangXuLy,
+                        }).appendTo(container);
+                    }
+                },
+                {
+                    caption: 'Xử lý',
+                    width: '5%',
+                    alignment: 'center',
+                    cellTemplate: function (container, options) {
+
+                        var dataSource = [
+                            {
+                                id: '1_1',
+                                name:'Xem'
+                            },
+                            {
+                                id: '1_2',
+                                name:'Thu hổi'
+                            }
+                        ]
+
+                        var menuData = [{
+                            id: '1',
+                            name: '',
+                            icon: "/Images/setting.png",
+                            items: dataSource
+                        }];
+
+                        $("<div>").dxMenu({
+
+                            dataSource: menuData,
+                            displayExpr: 'name',
+                            onItemClick: function (e) {
+                                var id = e.itemData.id;
+
+                                if (id === '1_1') {
+                                    View(1);
+                                }
+
+                                if (id === '1_2') {
+                                    var tb = $.confirm({
+                                        tiltle: 'Xác nhận thu hồi',
+                                        content: 'Bạn có chắc muốn thu hồi dự án này?',
+                                        buttons: {
+                                            'Đồng ý': function () {
+                                                Notification('success', 'Thông báo', 'Thu hồi thành công');
+                                                
+                                                tb.close();
+                                                return;
+                                            },
+                                            'Không': function () {
+
+                                                tb.close();
+                                                return;
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                        }).css("text-align", "center").appendTo(container);
+                    }
+                }
+            ],
+        });
+
+        //-------------------------Tab 2-------------------------------
+        $("#gridContainer2").dxDataGrid({
+            dataSource: data2,
+            showBorders: true,
+            showColumnLines: true,
+            wordWrapEnabled: true,
+            showRowLines: true,
+            remoteOperations: {
+                filtering: true,
+                paging: true,
+                sorting: false,
+                groupPaging: false,
+                grouping: false,
+                summary: true
+            },
+            selection: {
+                mode: 'single',
+                showCheckBoxesMode: 'always',
+                selectAllMode: 'page',
+            },
+            grouping: {
+                autoExpandAll: true,
+            },
+            columns: [
+                {
+                    caption: 'Stt',
+                    width: '5%',
+                    alignment: 'center',
+                    dataField: 'id',
+                },
+                {
+                    caption: 'Tên dự án',
+                    width: '20%',
+                    alignment: 'left',
+                    dataField: 'name',
+                },
+                {
+                    caption: 'Nội dung và quy mô',
+                    width: '30%',
+                    alignment: 'left',
+                    dataField: 'content',
+                },
+                {
+                    caption: 'Thời gian thực hiện',
+                    width: '10%',
+                    alignment: 'left',
+                    dataField: 'date',
+                },
+                {
+                    caption: 'Tổng mức đầu tư',
+                    width: '15%',
+                    alignment: 'left',
+                    dataField: 'total',
+                },
+                {
+                    caption: 'Trạng thái',
+                    width: '15%',
+                    alignment: 'left',
+                    cellTemplate: function (container, options) {
+                        $("<div>").dxSelectBox({
+                            placeholder: 'Nhập nội dung...',
+                            items: _arrTrangThaiDaXuLy,
+                            onItemClick: function (e) {
+                                var option = e.itemData;
+
+                                if (option === 'Cho ý kiến') {
+                                    var MaDuAn = options.data.id;
+
+                                    ShowPopup(MaDuAn);
+
+
+                                }
+                            }
+                        }).appendTo(container);
+                    }
+                },
+                {
+                    caption: 'Xử lý',
+                    width: '5%',
+                    alignment: 'center',
+                    cellTemplate: function (container, options) {
+
+                        var dataSource = [
+                            {
+                                id: '1_1',
+                                name: 'Xem'
+                            },
+                            {
+                                id: '1_2',
+                                name: 'Thu hổi'
+                            }
+                        ]
+
+                        var menuData = [{
+                            id: '1',
+                            name: '',
+                            icon: "/Images/setting.png",
+                            items: dataSource
+                        }];
+
+                        $("<div>").dxMenu({
+                            dataSource: menuData,
+                            displayExpr: 'name',
+                            onItemClick: function (e) {
+                                var id = e.itemData.id;
+
+                                if (id === '1_1') {
+                                    View(1);
+                                }
+
+                                if (id === '1_2') {
+                                    var tb = $.confirm({
+                                        tiltle: 'Xác nhận thu hồi',
+                                        content: 'Bạn có chắc muốn thu hồi dự án này?',
+                                        buttons: {
+                                            'Đồng ý': function () {
+                                                Notification('success', 'Thông báo', 'Thu hồi thành công');
+
+                                                tb.close();
+                                                return;
+                                            },
+                                            'Không': function () {
+
+                                                tb.close();
+                                                return;
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                        }).css("text-align", "center").appendTo(container);
+                    }
+                }
+            ],
+        });
+
+
+
+    }
+
+
+        //--------------------------------------------------------------
+        function CustomStoreData() {
+
+            var dataSource = new DevExpress.data.CustomStore({
+                load: function (loadOptions) {
+                    var deferred = $.Deferred();
+                    var ent = {};
+                    data = [{ ID: '1', tenFile: "File 1", TotalRecords: 2 }, { ID: '2', tenFile: "File 2" }];
+                    deferred.resolve(data, { totalCount: data[0].TotalRecords });
+
+                    return deferred.promise();
+                },
+                remove(key) {
+                    if (!isEmpty(key)) {
+                        /* SendRequest('Chusohuu/SoftDelete?id=' + key.id)*/
+                    }
+                }
+            });
+
+            return dataSource;
+        }
+
+        //-------------------------Pop up-------------------------------
+        function ShowPopup(MaDuAn) {
+
+
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:8083/api/DuAn/GetProjectById?id=' + MaDuAn,
+                dataType: 'json',
+                success: function (response) {
+                    console.log(response);
+
+                    $('#txtPopUpChuDauTu').dxTextBox({
+                        value: response.chuDauTuID,
+                        disabled: true,
+                    }).dxTextBox('instance');
+
+                    $('#txtPopUpMaDuAn').dxTextBox({
+                        value: response.maDuAn,
+                        disabled: true,
+                    }).dxTextBox('instance');
+
+                    $('#txtPopUpTenDuAn').dxTextBox({
+                        value: response.tenDuAn,
+                        disabled: true,
+                    }).dxTextBox('instance');
+
+
+                },
+                error: function () {
+                    console.error(error);
+                }
+            });
+
+
+            $('#popUpChoYKien').dxPopup({
+                showTitle: false,
+                width: "70%",
+                height: "75%",
+                closeOnOutsideClick: false,
+                visible: true,
+                onShown: function () {
+                        $("#scrollview").dxScrollView({
+                            height: '100%',
+                            width: '100%',
+                        });
+                },
+
+            }).dxPopup("instance").show();;
+
+            //$('#txtPopUpChuDauTu').dxTextBox({}).dxTextBox('instance');
+            //$('#txtPopUpMaDuAn').dxTextBox({}).dxTextBox('instance');
+            //$('#txtPopUpTenDuAn').dxTextBox({}).dxTextBox('instance');
+            $('#txtPopUpNoiDungYKien').dxTextArea({
+                height: 90,
+            }).dxTextArea('instance');
+            $('#txtPopUpFileDinhKem').dxTextBox({}).dxTextBox('instance');
+
+            $('#gridFileContainer').dxDataGrid({
+
+                dataSource: CustomStoreData() ?? [],
+
+                showBorders: true,
+                showColumnLines: true,
+                wordWrapEnabled: true,
+                showRowLines: true,
+                remoteOperations: {
+                    filtering: true,
+                    paging: true,
+                    sorting: false,
+                    groupPaging: false,
+                    grouping: false,
+                    summary: true
+                },
+                selection: {
+                    mode: 'single',
+                    showCheckBoxesMode: 'always',
+                    selectAllMode: 'page',
+                },
+                grouping: {
+                    autoExpandAll: true,
+                },
+
+                columns: [
+                    {
+                        caption: 'Stt',
+                        width: '5%',
+                        alignment: 'center',
+                        dataField: 'ID',
+                    },
+                    {
+                        caption: 'Tên file',
+                        width: '80%',
+                        alignment: 'left',
+                        dataField: "tenFile",
+                        //allowSorting: false
+                    },
+                    {
+                        caption: 'Tải',
+                        width: '5%',
+                        alignment: 'center',
+                        cellTemplate: function (container, options) {
+                            $("<div>").append($("<img>", {
+                                "class": "clsbtnCursor",
+                                "src": "/Images/attachment.png",
+                            })).appendTo(container);
+                        }
+                    },
+                    {
+                        caption: 'Xóa',
+                        width: '5%',
+                        alignment: 'center',
+                        cellTemplate: function (container, options) {
+                            $("<div>").append($("<img>", {
+                                "class": "clsbtnCursor",
+                                "src": "/Images/xoa.png",
+                            })).on('dxclick', function () {
+                                $('#gridContainer').dxDataGrid('instance').deleteRow(options.rowIndex);
+                            }).appendTo(container);
+                        }
+                    },
+                    {
+                        caption: 'Ký số',
+                        width: '5%',
+                        alignment: 'center',
+                        cellTemplate: function (container, options) {
+                            $("<div>").append($("<img>", {
+                                "class": "clsbtnCursor",
+                                "src": "/Images/edit.png",
+                            })).appendTo(container);
+                        }
+                    }
+                ]
+            })
+
+        }
+
+        function HidePopup() {
+            console.log('hide');
+            $('#popUpChoYKien').dxPopup('instance').hide();
+        }
+
+
+
+        //-----------------------------------------
+    $(document).ready(function () {
+        InitExtreme();
+    })
+
+    </script>

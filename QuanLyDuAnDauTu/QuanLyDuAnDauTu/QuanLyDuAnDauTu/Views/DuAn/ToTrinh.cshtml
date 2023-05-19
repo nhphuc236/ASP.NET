@@ -1,0 +1,299 @@
+﻿<div class="panel panel-primary">
+
+    <div class="col-md-12">
+        <h1 class="TitleModule">
+            TỜ TRÌNH
+        </h1>
+    </div>
+
+    <div class="panel-body">
+        <div class="form-horizontal">
+            <div class="col-md-12">
+                <div class="col-md-12">
+
+                    <div class="col-md-12">
+                        <label class="col-md-2 control-label col-md-offset-1">Số văn bản</label>
+                        <div class="col-md-3">
+                            <div id="txtSoVanBan"></div>
+                        </div>
+
+                        <label class="col-md-2 control-label">Ngày văn bản</label>
+                        <div class="col-md-3">
+                            <div id="txtNgayVanBan"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="col-md-2 control-label col-md-offset-1">Người ký</label>
+                        <div class="col-md-3">
+                            <div id="txtNguoiKy"></div>
+                        </div>
+
+                        <label class="col-md-2 control-label">Ngày ký</label>
+                        <div class="col-md-3">
+                            <div id="txtNgayKy"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="col-md-2 control-label col-md-offset-1">Trích yếu</label>
+                        <div class="col-md-8">
+                            <div id="txtTrichYeu"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12" style="margin-top: 10px;">
+                        <label class="col-md-2 control-label col-md-offset-1">File đính kèm</label>
+                        <div class="col-md-3">
+                            <div id="txtFileDinhKem"></div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <a class="btn btn-default btn_w">
+                                Đính kèm
+                            </a>
+                        </div>
+
+                        <div class="col-md-3" style="text-align: right;">
+                            <img src="~/Images/word.png" height="20" width="20" style="cursor: pointer" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-12" style="margin-top: 20px;">
+                        <div class="col-md-10 col-md-offset-1">
+                            <div id="gridContainer"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12" style="margin-top: 20px;">
+                        <div class="col-md-10 col-md-offset-1">
+                            <div id="selectNoiNhan"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+      
+
+            <div class="col-md-12" style="text-align: center; margin-top: 20px;">
+                <ul>
+                    <li style="display:inline; margin-right: 10px">
+                        <a class="btn btn-default" style="width: 60px;">
+                            <img src="~/Images/save1.png" />
+                            Lưu
+                        </a>
+                    </li>
+                    <li style="display: inline; margin-right: 10px">
+                        <a class="btn btn-default" style="width: 60px;">
+                            <img src="~/Images/delete.png" />
+                            Xóa
+                        </a>
+                    </li>
+                    <li style="display: inline; margin-right: 10px">
+                        <a class="btn btn-default" style="width: 60px;">
+                            <img src="~/Images/send.png" />
+                            Gửi
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+    <script>
+
+        const _arrNoiNhan = [
+            { ID: 1, Address: "Sở TTTT" },
+            { ID: 2, Address: "Sở Tài Chính" },
+            { ID: 3, Address: "UBND" }
+        ];
+
+        function IniteExTreme() {
+
+            const now = new Date();
+
+            $('#txtSoVanBan').dxTextBox({}).dxTextBox("instance");
+
+            $('#txtNgayVanBan').dxDateBox({
+                type: 'date',
+                value: now,
+                displayFormat: 'dd/MM/yyyy',
+            });
+
+            $('#txtNguoiKy').dxTextBox({}).dxTextBox("instance");
+
+            $('#txtNgayKy').dxDateBox({
+                type: 'date',
+                value: now,
+                displayFormat: 'dd/MM/yyyy',
+            });
+
+            $('#txtTrichYeu').dxTextArea({
+                height: 90,
+            }).dxTextArea('instance');
+
+            $('#txtFileDinhKem').dxTextBox({}).dxTextBox('instance');
+
+            $('#gridContainer').dxDataGrid({
+
+                dataSource: CustomStoreData() ?? [],
+
+                hoverStateEnabled: true,
+                showBorders: true,
+                showColumnLines: true,
+                wordWrapEnabled: true,
+                showRowLines: true,
+                remoteOperations: {
+                    filtering: true,
+                    paging: true,
+                    sorting: false,
+                    groupPaging: false,
+                    grouping: false,
+                    summary: true
+                },
+                selection: {
+                    mode: 'single',
+                    showCheckBoxesMode: 'always',
+                    selectAllMode: 'page',
+                },
+                grouping: {
+                    autoExpandAll: true,
+                },
+
+                columns: [
+                    {
+                        caption: 'Stt',
+                        width: '5%',
+                        alignment: 'center',
+                        dataField: 'ID',
+                    },
+                    {
+                        caption: 'Tên file',
+                        width: '80%',
+                        alignment: 'left',
+                        dataField: "tenFile",
+                       //allowSorting: false
+                    },
+                    {
+                        caption: 'Tải',
+                        width: '5%',
+                        alignment: 'center',
+                        cellTemplate: function (container, options) {
+                            $("<div>").append($("<img>", {
+                                "class": "clsbtnCursor",
+                                "src": "/Images/attachment.png",
+                            })).appendTo(container);
+                        }
+                    },
+                    {
+                        caption: 'Xóa',
+                        width: '5%',
+                        alignment: 'center',
+                        cellTemplate: function (container, options) {
+                            $("<div>").append($("<img>", {
+                                "class": "clsbtnCursor",
+                                "src": "/Images/delete.png",
+                            })).on('dxclick', function () {
+                                $('#gridContainer').dxDataGrid('instance').deleteRow(options.rowIndex);
+                            }).appendTo(container);
+                        }
+                    },
+                    {
+                        caption: 'Ký số',
+                        width: '5%',
+                        alignment: 'center',
+                        cellTemplate: function (container, options) {
+                            $("<div>").append($("<img>", {
+                                "class": "clsbtnCursor",
+                                "src": "/Images/edit.png",
+                            })).appendTo(container);
+                        }
+                    }
+                ]
+            })
+
+
+            $('#selectNoiNhan').dxDataGrid({
+                dataSource: _arrNoiNhan,
+
+                showBorders: true,
+                showColumnLines: true,
+                wordWrapEnabled: true,
+                showRowLines: true,
+                remoteOperations: {
+                    filtering: true,
+                    paging: true,
+                    sorting: false,
+                    groupPaging: false,
+                    grouping: false,
+                    summary: true
+                },
+                hoverStateEnabled: true,
+                scrolling: { mode: 'virtual' },
+                height: '100%',
+                keyExpr: 'ID',
+                showColumnHeaders: true,
+                selection: { mode: 'multiple' },
+
+                columns: [
+                    {
+                        dataField: 'ID',
+                        caption: 'Stt',
+                        width: '5%',
+                        alignment: 'center',
+                    },
+                    {
+                        dataField: 'Address',
+                        caption: 'Nơi nhận',
+                        alignment: 'left',
+                        width: '20%',
+                    },
+                    {
+                        dataField: 'Content',
+                        caption: 'Nội dung',
+                        alignment: 'left',
+                        width: '70%',
+                        cellTemplate: function (container, options) {
+                            $("<div>").dxTextBox({
+                                placeholder: 'Nhập nội dung...'
+                            }).appendTo(container);
+                        }
+                    },
+                    {
+                        type: 'selection',
+                        width: '5%'
+                    }
+                ],
+            })
+        }
+        //--------------------------------------------------------------
+        function CustomStoreData() {
+
+            var dataSource = new DevExpress.data.CustomStore({
+                load: function (loadOptions) {
+                    var deferred = $.Deferred();
+                    var ent = {};
+                    data = [{ID:'1', tenFile: "File 1", TotalRecords: 2 }, {ID:'2', tenFile: "File 2" }];
+                    deferred.resolve(data, { totalCount: data[0].TotalRecords });
+
+                    return deferred.promise();
+                },
+                remove(key) {
+                    if (!isEmpty(key)) {
+                        /* SendRequest('Chusohuu/SoftDelete?id=' + key.id)*/
+                    }
+                }
+            });
+
+            return dataSource;
+        }
+
+        //--------------------------------------------------------------
+
+        $(document).ready(function () {
+            IniteExTreme();
+        })
+
+    </script>

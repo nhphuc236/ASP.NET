@@ -1,0 +1,539 @@
+﻿<style>
+    label {
+        text-align: left !important;
+    }
+</style>
+
+<div class="panel panel-primary">
+    <div class="col-md-12">
+        <h1 class="TitleModule">
+            DANH SÁCH DỰ ÁN
+        </h1>
+    </div>
+
+    <div class="panel-body">
+        <div class="form-horizontal">
+            <div class="col-md-12">
+                <div class="col-md-12">
+
+                    <div class="col-md-12">
+                        <label class="control-label col-md-2">Chủ đầu tư</label>
+                        <div class="col-md-4">
+                            <div id="selectChuDauTu"></div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <label class="control-label col-md-12">Tên dự án</label>
+                        </div>
+                        <div class="col-md-4">
+                            <div id="txtTenDuAn"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="control-label col-md-2">Thời gian thực hiện từ</label>
+                        <div class="col-md-4">
+                            <div id="txtThoiGianThucHienTu"></div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <label class="control-label col-md-12">Thời gian thực hiện đến</label>
+                        </div>
+                        <div class="col-md-4">
+                            <div id="txtThoiGianThucHienDen"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12" style="text-align: right; margin-top:10px;">
+                        <a>
+                            <img src="~/Images/save2.png" />
+                        </a>
+                    </div>
+
+                    <div class="col-md-12" style="text-align:center">
+                        <a class="btn btn-default", onclick="sendRequest()">
+                            <img src="~/Images/search.png" />
+                            Tìm kiếm
+                        </a>
+                    </div>
+
+                    <!--Tab Panel-->
+                    <div class="col-md-12" style="margin-top: 20px;">
+                        <div id="tabpanel">
+                            <div data-options="dxItem: { title: 'Đang xử lý' } ">
+                                <div id="gridContainer1"></div>
+                            </div>
+                            <div data-options="dxItem: { title: 'Đã xử lý' } ">
+                                <div id="gridContainer2"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var urlChiTiet = '@Html.Raw(Url.Action("TaoDuAn", "DuAn"))';
+
+        var _arrChuDauTu = [];
+        _arrChuDauTu.push({ donViId: 0, tenDonVi: 'Xem tất cả' });
+
+        var donViDauTu = SendRequest('http://localhost:8083/api/DanhMuc/GetAllDonViDauTu');
+        if (Array.isArray(donViDauTu)) {
+            _arrChuDauTu = _arrChuDauTu.concat(donViDauTu);
+        }
+
+        const _arrTrangThaiDaXuLy = ['Đã gửi S4T']
+
+        var data2 = [
+            { id: 1, name: "DuAn3", content: "...", date: "...", total: "....", },
+            { id: 2, name: "DuAn4", content: "...", date: "...", total: "....", }
+        ];
+
+
+        //-----------------------------------------
+        function sendRequest() {
+            var tenDuAn = $('#txtTenDuAn').dxTextBox('instance').option('value');
+            var chuDauTuId = $('#selectChuDauTu').dxSelectBox('instance').option('value');
+            var thucHienTuNgay = $('#txtThoiGianThucHienTu').dxDateBox('option', 'value');
+            var thucHienDenNgay = $('#txtThoiGianThucHienDen').dxDateBox('option', 'value');
+            var pageIndex = 1;
+            var pageSize = 10;
+
+            var data = {
+                chuDauTuId: chuDauTuId,
+                tenDuAn: tenDuAn,
+                thucHienTuNgay: thucHienTuNgay,
+                thucHienDenNgay: thucHienDenNgay,
+                pageIndex: pageIndex,
+                pageSize: pageSize,
+            }
+            var url = 'http://localhost:8083/api/DuAn/GetDuAnBySearch';
+
+            var _arrDangXuLy;
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                headers: {
+                    "accept": "*/*",
+                    "Content-Type": "application/json"
+                },
+                data: JSON.stringify(data),
+            }).done(function (response) {
+
+                _arrDangXuLy = response;
+
+                $('#gridContainer1').dxDataGrid('instance').option('dataSource', _arrDangXuLy);
+
+            }).fail(function (xhr) {
+                console.log(xhr.responseJSON.Message + ": " + xhr.statusText);
+            });
+        }
+
+    //-----------------------------------------
+        function LoadAllDuAn() {
+            var _arrDuAn = SendRequest('http://localhost:8083/api/DuAn/GetAllDuAn');
+            console.log(_arrDuAn);
+            $('#gridContainer1').dxDataGrid('instance').option('dataSource', _arrDuAn);
+        }
+   
+    //-----------------------------------------
+    function InitExtreme() {
+        $('#selectChuDauTu').dxSelectBox({
+            placeholder: 'Chọn chủ đầu tư...',
+            items: _arrChuDauTu,
+            valueExpr: 'donViId',
+            displayExpr: 'tenDonVi',
+            showClearButton: true,
+        })
+
+        $('#txtTenDuAn').dxTextBox({}).dxTextBox('instance')
+
+        $('#txtThoiGianThucHienTu').dxDateBox({
+            displayFormat: 'dd/MM/yyyy',
+            onValueChanged: function (e) {
+                var fromDate = e.value;
+                var toDate = $('#txtThoiGianThucHienDen').dxDateBox('option', 'value');
+
+                if (fromDate && toDate && fromDate > toDate) {
+                    $('#txtThoiGianThucHienTu').dxDateBox('option', 'value', null);
+                    alert('Ngày bắt đầu không được lớn hơn ngày kết thúc.');
+                }
+            }
+        });
+
+        $('#txtThoiGianThucHienDen').dxDateBox({
+            displayFormat: 'dd/MM/yyyy',
+            onValueChanged: function (e) {
+                var fromDate = $('#txtThoiGianThucHienTu').dxDateBox('option', 'value');
+                var toDate = e.value;
+
+                if (fromDate && toDate && fromDate > toDate) {
+                    $('#txtThoiGianThucHienDen').dxDateBox('option', 'value', null);
+                    alert('Ngày kết thúc không được nhỏ hơn ngày bắt đầu.');
+                }
+            }
+        });
+
+        $('#tabpanel').dxTabPanel({
+            deferRendering: false,
+            height: 260,
+            selectedIndex: 0,
+        }).dxTabPanel('instance');
+
+        $("#gridContainer1").dxDataGrid({
+            dataSource: [],
+            showBorders: true,
+            showColumnLines: true,
+            wordWrapEnabled: true,
+            showRowLines: true,
+            height: 230,
+            remoteOperations: {
+                filtering: true,
+                paging: true,
+                sorting: false,
+                groupPaging: false,
+                grouping: false,
+                summary: true
+            },
+            selection: {
+                mode: 'single',
+                showCheckBoxesMode: 'always',
+                selectAllMode: 'page',
+            },
+            grouping: {
+                autoExpandAll: true,
+            },
+            editing: {
+                texts: {
+                    confirmDeleteMessage: ""
+                }
+            },
+            columns: [
+                {
+                    caption: 'Stt',
+                    cellTemplate: function (cellElement, cellInfo) {
+                        cellElement.text(cellInfo.row.rowIndex + 1)
+                    },
+                    alignment: 'center',
+                },  
+                {
+                    caption: 'Tên dự án',
+                    width: '20%',
+                    alignment: 'left',
+                    dataField: 'tenDuAn',
+                },
+                {
+                    caption: 'Nội dung và quy mô',
+                    width: '25%',
+                    alignment: 'left',
+                    dataField: 'noiDungVaQuyMo',
+                },
+                {
+                    caption: 'Thực hiện từ',
+                    width: '10%',
+                    alignment: 'left',
+                    dataField: 'thucHienTuNgay',
+                    dataType: 'date',
+                    format: 'dd/MM/yyyy',
+                    alignment: 'center',
+                },
+                {
+                    caption: 'Thực hiện đến',
+                    width: '10%',
+                    alignment: 'left',
+                    dataField: 'thucHienDenNgay',
+                    dataType: 'date',
+                    format: 'dd/MM/yyyy',
+                    alignment: 'center',
+                },
+                {
+                    caption: 'Tổng mức đầu tư',
+                    width: '10%',
+                    alignment: 'left',
+                    dataField: 'tongMucDauTu',
+                },
+                {
+                    caption: 'Trạng thái',
+                    width: '15%',
+                    alignment: 'left',
+                    dataField:'trangThai.tenTrangThai',
+                },
+                {
+                    caption: 'Xử lý',
+                    width: '5%',
+                    alignment: 'center',
+                    cellTemplate: function (container, options) {
+
+                        var dataSource = [
+                            {
+                                id: '1_1',
+                                name:'Xem'
+                            },
+                            {
+                                id: '1_2',
+                                name:'Xóa'
+                            },
+                            {
+                                id: '1_3',
+                                name: 'Gửi S4T'
+                            },
+                            {
+                                id: '1_4',
+                                name: 'Cập nhật'
+                            },
+                        ]
+
+                        var menuData = [{
+                            id: '1',
+                            name: '',
+                            icon: "/Images/setting.png",
+                            items: dataSource
+                        }];
+
+                        $("<div>").dxMenu({
+
+                            dataSource: menuData,
+                            displayExpr: 'name',
+                            onItemClick: function (e) {
+                                var menuId = e.itemData.id;
+
+                                if (menuId === '1_1') {
+                                    var dataGrid = $('#gridContainer1').dxDataGrid('instance');
+                                    var rowIndex = dataGrid.getRowIndexByKey(dataGrid.getSelectedRowKeys()[0]);
+
+                                    var dataSource = dataGrid.getDataSource();
+                                    var itemsArray = dataSource.items();
+                                    var rowData = itemsArray[rowIndex];
+                                    var duAnId = rowData.id;
+
+                                    window.location.href = urlChiTiet + "?Id=" + duAnId;
+                                }
+                                if (menuId === '1_2') {
+                                    var tb = $.confirm({
+                                        title: 'Xác nhận xóa',
+                                        content: 'Bạn có chắc chắn xóa dựa án này?',
+                                        buttons: {
+                                            'Đồng ý': function () {
+                                                var dataGrid = $('#gridContainer1').dxDataGrid('instance');
+                                                var rowIndex = dataGrid.getRowIndexByKey(dataGrid.getSelectedRowKeys()[0]);
+
+                                                var dataSource = dataGrid.getDataSource();
+                                                var itemsArray = dataSource.items();
+                                                var rowData = itemsArray[rowIndex];
+                                                var duAnId = rowData.id;
+
+                                                SendRequest('http://localhost:8083/api/DuAn/SoftDeleteById?id=' + duAnId)
+
+                                                dataGrid.deleteRow(rowIndex);
+
+                                                Notification('success', 'Thông báo', 'Xóa thành công');
+                                                
+                                                tb.close();
+                                                return;
+                                            },
+                                            'Không': function () {
+
+                                                tb.close();
+                                                return;
+                                            }
+                                        }
+                                    })
+                                }
+                                if (menuId === '1_3') {
+                                    let dataGrid = $('#gridContainer1').dxDataGrid('instance');
+                                    let rowIndex = dataGrid.getRowIndexByKey(dataGrid.getSelectedRowKeys()[0]);
+
+                                    let dataSource = dataGrid.getDataSource();
+                                    let itemsArray = dataSource.items();
+                                    let rowData = itemsArray[rowIndex];
+
+
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: 'http://localhost:8083/api/DuAn/UpdateTrangThaiDuAn',
+                                        headers: {
+                                            "accept": "*/*",
+                                            "Content-Type": "application/json"
+                                        },
+                                        data: JSON.stringify({
+                                            id: rowData.id,
+                                            trangThaiID: 3,
+                                        }),
+                                        success: function (response, status, xhr) {
+                                            console.log("Success! Response code: " + xhr.status);
+                                            const message = "Đã gửi Sở TTTT"
+                                            DevExpress.ui.notify({
+                                                message,
+                                                position: {
+                                                    my: 'center top',
+                                                    at: 'center top',
+                                                },
+                                            }, 'success', 3000);
+
+                                            sendRequest();
+                                        },
+                                        error: function (xhr, status, error) {
+                                            console.log("Error: " + error);
+                                        }
+                                    })
+
+                                   
+                                }
+                            }
+                        }).css("text-align", "center").appendTo(container);
+                    }
+                }
+            ],
+        });
+
+        $("#gridContainer2").dxDataGrid({
+            dataSource: data2,
+            showBorders: true,
+            showColumnLines: true,
+            wordWrapEnabled: true,
+            showRowLines: true,
+            remoteOperations: {
+                filtering: true,
+                paging: true,
+                sorting: false,
+                groupPaging: false,
+                grouping: false,
+                summary: true
+            },
+            selection: {
+                mode: 'single',
+                showCheckBoxesMode: 'always',
+                selectAllMode: 'page',
+            },
+            grouping: {
+                autoExpandAll: true,
+            },
+            editing: {
+                texts: {
+                    confirmDeleteMessage: ""
+                }
+            },
+            columns: [
+                {
+                    caption: 'Stt',
+                    width: '5%',
+                    alignment: 'center',
+                    dataField: 'id',
+                },
+                {
+                    caption: 'Tên dự án',
+                    width: '20%',
+                    alignment: 'left',
+                    dataField: 'name',
+                },
+                {
+                    caption: 'Nội dung và quy mô',
+                    width: '30%',
+                    alignment: 'left',
+                    dataField: 'content',
+                },
+                {
+                    caption: 'Thời gian thực hiện',
+                    width: '10%',
+                    alignment: 'left',
+                    dataField: 'date',
+                },
+                {
+                    caption: 'Tổng mức đầu tư',
+                    width: '15%',
+                    alignment: 'left',
+                    dataField: 'total',
+                },
+                {
+                    caption: 'Trạng thái',
+                    width: '15%',
+                    alignment: 'left',
+                    cellTemplate: function (container, options) {
+                        $("<div>").dxSelectBox({
+                            placeholder: 'Nhập nội dung...',
+                            items: _arrTrangThaiDaXuLy,
+                        }).appendTo(container);
+                    }
+                },
+                {
+                    caption: 'Xử lý',
+                    width: '5%',
+                    alignment: 'center',
+                    cellTemplate: function (container, options) {
+
+                        var dataSource = [
+                            {
+                                id: '1_1',
+                                name: 'Xem'
+                            },
+                            {
+                                id: '1_2',
+                                name: 'Thu hổi'
+                            }
+                        ]
+
+                        var menuData = [{
+                            id: '1',
+                            name: '',
+                            icon: "/Images/setting.png",
+                            items: dataSource
+                        }];
+
+                        $("<div>").dxMenu({
+
+                            dataSource: menuData,
+                            displayExpr: 'name',
+                            onItemClick: function (e) {
+                                var id = e.itemData.id;
+
+                                if (id === '1_1') {
+                                    View(1);
+                                }
+
+                                if (id === '1_2') {
+                                    var tb = $.confirm({
+                                        tiltle: 'Xác nhận thu hồi',
+                                        content: 'Bạn có chắc muốn thu hồi dự án này?',
+                                        buttons: {
+                                            'Đồng ý': function () {
+                                                const message = 'Đã thu hồi';
+                                                DevExpress.ui.notify({
+                                                    message,
+                                                    position: {
+                                                        my: 'center top',
+                                                        at: 'center top',
+                                                    },
+                                                }, 'success', 3000);
+
+
+                                                tb.close();
+                                                return;
+                                            },
+                                            'Không': function () {
+
+                                                tb.close();
+                                                return;
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                        }).css("text-align", "center").appendTo(container);
+                    }
+                }
+            ],
+        });
+
+    }
+
+    //-----------------------------------------
+    $(document).ready(function () {
+        InitExtreme();
+        LoadAllDuAn();
+    })
+
+    </script>

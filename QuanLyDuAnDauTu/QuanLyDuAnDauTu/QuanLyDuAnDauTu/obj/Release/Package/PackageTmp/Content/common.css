@@ -1,0 +1,1033 @@
+﻿
+.col-xs-1,
+.col-sm-1,
+.col-md-1,
+.col-lg-1,
+.col-xs-2,
+.col-sm-2,
+.col-md-2,
+.col-lg-2,
+.col-xs-3,
+.col-sm-3,
+.col-md-3,
+.col-lg-3,
+.col-xs-4,
+.col-sm-4,
+.col-md-4,
+.col-lg-4,
+.col-xs-5,
+.col-sm-5,
+.col-md-5,
+.col-lg-5,
+.col-xs-6,
+.col-sm-6,
+.col-md-6,
+.col-lg-6,
+.col-xs-7,
+.col-sm-7,
+.col-md-7,
+.col-lg-7,
+.col-xs-8,
+.col-sm-8,
+.col-md-8,
+.col-lg-8,
+.col-xs-9,
+.col-sm-9,
+.col-md-9,
+.col-lg-9,
+.col-xs-10,
+.col-sm-10,
+.col-md-10,
+.col-lg-10,
+.col-xs-11,
+.col-sm-11,
+.col-md-11,
+.col-lg-11,
+.col-xs-12,
+.col-sm-12,
+.col-md-12,
+.col-lg-12 {
+    min-height: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+    position: relative;
+}
+
+.TitleModule {
+    font-size: 16px;
+    padding: 5px 10px;
+    margin: 0;
+    color: #3092f4;
+    font-weight: bold;
+}
+
+    .TitleModule:before {
+        content: "\f101";
+        font-family: FontAwesome;
+        margin-right: 10px;
+        color: #fc913a;
+        font-size: 18px;
+    }
+
+.btn_w {
+    min-width: 100px;
+}
+
+.btnInline {
+    padding: 4px 12px;
+}
+
+.green {
+    color: green !important;
+}
+
+.blue {
+    color: blue !important;
+}
+
+.red {
+    color: red !important;
+}
+
+.dx-datagrid .dx-menu-horizontal {
+    height: 30px;
+}
+
+td[role="columnheader"] {
+    background: rgb(80,157,213);
+    text-align: center !important;
+    color: white;
+}
+
+/* width */
+::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 2.5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background-color: silver;
+    border-radius: 2.5px;
+}
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: grey;
+    }
+
+legend.clCustom {
+    font-size: 15px;
+    margin-bottom: 0px;
+    width: auto;
+    border: 0px solid #ddd;
+    padding: 3px 5px 5px 10px;
+    color: #0025f3;
+}
+
+fieldset.clCustom {
+    border: 1px solid #2f91f359 !important;
+    padding: 5px;
+    border-radius: 4px;
+    padding-left: 11px !important;
+}
+
+.dx-list-item-content {
+    white-space: normal;
+}
+
+label {
+    color: #00156e !important;
+    border: 1px solid #fff;
+    background: #ddebf7;
+    font-weight: normal;
+    padding: 5px !important;
+    margin-bottom: auto;
+}
+
+    label.border-dotted {
+        border-bottom: 1px dotted #8181817a;
+        color: #0a0a0a;
+        text-align: left !important;
+        background: none !important;
+        min-height: 28px;
+    }
+
+.required:after {
+    content: " *";
+    color: red;
+}
+
+a:hover,
+a:focus {
+    text-decoration: none !important;
+    cursor: pointer;
+}
+
+.dx-datagrid-rowsview .dx-row > .dx-master-detail-cell {
+    padding: 15px !important;
+    padding-left: 15px !important;
+}
+
+.dx-field-item-label-content {
+    text-align: right;
+}
+
+.dx-field-item-label-location-left {
+    margin: auto;
+    padding-right: 10px;
+}
+
+textarea {
+    border: none !important;
+    border-bottom: 0.5px solid  !important;
+}
+
+.dx-datagrid-rowsview .dx-texteditor-input {
+    border: 0.5px solid #6ecfff !important;
+}
+
+.clsbtnCursor {
+    cursor: pointer;
+}
+
+.leaflet-popup-content {
+    font-size: 1.28333em !important;
+}
+
+/* Style the tab */
+.tab {
+    overflow-x: auto;
+    overflow-y: hidden;
+    display: -webkit-box;
+    display: -moz-box;
+}
+
+    .tab span {
+        padding: 12px 15px;
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        transition: color .5s ease,background-color .5s ease;
+    }
+
+        .tab span:hover {
+            background-color: rgb(51, 122, 183, 0.2);
+        }
+
+        .tab span.active {
+            background-color: #337ab7;
+            color: white;
+        }
+
+.popup-form {
+    position: relative;
+    height: 750px;
+    width: 650px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    opacity: 0;
+    z-index: 990;
+    transition: opacity .1s ease;
+    border-radius: 1rem;
+    box-shadow: 1px 1px 5px rgb(150, 150, 150);
+    padding: 0.5rem 2rem 1rem 2rem;
+}
+
+.popup-form-close {
+    position: relative;
+    height: 30px;
+    width: 30px;
+    border-radius: 1rem;
+    transition: background-color .3s ease;
+    cursor: pointer;
+}
+
+.popup-form-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+}
+
+.popup-form-footer {
+    display: flex;
+    align-content: center;
+    justify-content: flex-end;
+    column-gap:2rem;
+}
+
+.popup-form-close:hover {
+    background-color: rgba(255, 68, 0);
+}
+
+    .popup-form-close:hover::after {
+        background-color: white;
+    }
+
+    .popup-form-close:hover:before {
+        background-color: white;
+    }
+
+.popup-form.active {
+    opacity: 1;
+}
+
+.popup-form-close::after {
+    content: "";
+    position: absolute;
+    top: 45%;
+    left: 30%;
+    height: 2.5px;
+    width: 13px;
+    background-color: gray;
+    transform: rotate(45deg);
+}
+
+.popup-form-close::before {
+    content: "";
+    position: absolute;
+    top: 45%;
+    left: 30%;
+    height: 2.5px;
+    width: 13px;
+    background-color: gray;
+    transform: rotate(135deg);
+}
+
+.popup {
+    position: relative;
+    height: 550px;
+    width: 900px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    opacity: 0;
+    z-index: 990;
+    transition: opacity .1s ease;
+    border-radius: 1rem;
+    box-shadow: 1px 1px 5px rgb(150, 150, 150);
+    padding: 1rem;
+    background-color:white;
+}
+
+.popup-close {
+    position: absolute;
+    top: -4%;
+    right: -2.25%;
+    height: 40px;
+    width: 40px;
+    z-index: 991;
+    border-radius: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: gray;
+    transition: background-color .3s ease;
+    cursor: pointer;
+}
+
+.popup-close:hover {
+    background-color: rgba(255, 68, 0);
+}
+
+.popup.active {
+    opacity: 1;
+}
+
+.popup-close::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 35%;
+    height: 2.5px;
+    width: 13px;
+    background-color: white;
+    transform: rotate(45deg);
+}
+
+.popup-close::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 35%;
+    height: 2.5px;
+    width: 13px;
+    background-color: white;
+    transform: rotate(135deg);
+}
+
+.popup-background {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 990;
+    backdrop-filter: blur(0px) opacity(0);
+    transition: backdrop-filter .3s ease,visibility .3s ease;
+    visibility: hidden
+}
+
+    .popup-background.active {
+        visibility: visible;
+        backdrop-filter: blur(10px) opacity(1);
+    }
+
+/* Style the tab */
+.tab-popup {
+    overflow-x: auto;
+    overflow-y: hidden;
+    display: -webkit-box;
+    display: -moz-box;
+}
+
+    .tab-popup span {
+        padding: 12px 15px;
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        transition: color .5s ease,background-color .5s ease;
+    }
+
+        .tab-popup span:hover {
+            background-color: rgb(51, 122, 183, 0.2);
+        }
+
+        .tab-popup span.active {
+            background-color: #337ab7;
+            color: white;
+        }
+
+/* Style the tab slider*/
+.tab-slider {
+    max-width: 100%;
+    margin: auto;
+    position: relative;
+    border: 1px #337ab7 solid;
+    border-radius: 5px;
+    overflow: hidden;
+    user-select: none;
+}
+
+.tab-slider-wrapper {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.tab-slider-main {
+    display: flex;
+    position: relative;
+    transition: transform .4s ease;
+    height: 100%;
+}
+
+.tab-slider-next,
+.tab-slider-previous {
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    padding: 8.5px 15px;
+    transition: background-color .5s ease, visibility .5s ease;
+    cursor: pointer;
+}
+
+.tab-slider-previous {
+    background: linear-gradient(90deg, rgba(221, 235, 247) 0%, rgba(221, 235, 247) 50%, rgba(221, 235, 247,0) 100%);
+    left: 0;
+    visibility: hidden;
+}
+
+/*.tab-slider-previous:hover {
+            background: linear-gradient(90deg, gainsboro 0%, gainsboro 50%, rgba(221,221,221,0) 100%);
+        }*/
+
+.tab-slider-next {
+    background: linear-gradient(90deg, rgba(221, 235, 247,0) 0%, rgba(221, 235, 247) 50%, rgba(221, 235, 247) 100%);
+    right: 0;
+}
+
+/*.tab-slider-next:hover {
+            background: linear-gradient(90deg, gainsboro 0%, gainsboro 50%, rgba(221,221,221,0) 100%);
+        }*/
+
+.tab-slider-item {
+    flex: 1 0 32.5%;
+    height: 35px;
+    overflow: hidden;
+}
+
+.tab-slider span {
+    padding: 10px 8px 0px 8px;
+    background-color: inherit;
+    text-align: center;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border: 1px inherit #ddd;
+    transition: color .5s ease,background-color .5s ease;
+}
+
+    .tab-slider span:hover {
+        background-color: rgb(51, 122, 183, 0.2);
+    }
+
+    .tab-slider span.active {
+        background-color: #337ab7;
+        color: white;
+    }
+
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border-top: none;
+}
+
+.dx-fileuploader-wrapper {
+    padding: 7px;
+}
+
+.dx-datagrid-col-cursor {
+    cursor: pointer;
+    color: rgb(16, 87, 174)
+}
+
+/* Create a Card */
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 0.2em;
+    backdrop-filter: blur(20px);
+}
+
+    .card .sub-title {
+        color: white;
+        font-weight: 500;
+        margin-top: -5px
+    }
+
+/* select item with treeview */
+.dx-treeview-node.dx-treeview-node-is-leaf.dx-state-selected
+.dx-item.dx-treeview-item {
+    background: gainsboro;
+    text-align: justify;
+}
+
+.dx-treeview .dx-treeview-node-container {
+    text-align: justify !important;
+    font-size: 12px;
+}
+
+.slider {
+    height: 100%;
+    max-width: 100%;
+    margin: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 15px 15px 0px 15px;
+    row-gap: 15px;
+}
+
+.slider-wrapper {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.slider-main {
+    display: flex;
+    position: relative;
+    transition: transform .4s ease;
+    height: 100%;
+}
+
+.slider-item {
+    flex: 1 0 100%;
+    max-height: 480px;
+    overflow: auto;
+    padding:1rem .5rem;
+}
+
+.slider-popup {
+    height: 100%;
+    max-width: 100%;
+    margin: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 15px 15px 0px 15px;
+}
+
+.slider-popup-wrapper {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.slider-popup-main {
+    display: flex;
+    position: relative;
+    transition: transform .4s ease;
+    height: 100%;
+}
+
+.slider-popup-item {
+    flex: 1 0 100%;
+    max-height: 405px;
+    overflow: auto;
+}
+
+.slider-pannel {
+    height: 100%;
+    max-width: 100%;
+    margin: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 2rem 2rem 0rem 2rem;
+}
+
+.slider-pannel-wrapper {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.slider-pannel-main {
+    display: flex;
+    position: relative;
+    transition: transform .4s ease;
+    height: 100%;
+}
+
+.slider-pannel-item {
+    flex: 1 0 100%;
+    max-height: 480px;
+    overflow: auto;
+    padding: 1rem;
+}
+
+.exelTableVn2000 thead tr th,
+.exelTableVn2000 tbody tr td {
+    text-align: center;
+    padding: 2.5px 5px;
+    font-size: 9px;
+}
+
+.mapBoxCustom {
+    display: flex;
+    justify-content: center;
+    height: 0px;
+    width: 400px;
+    position: absolute;
+    top: 45px;
+    left: 65px;
+    background-color: white;
+    transition: visibility .1s ease, height .4s ease;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    visibility: hidden;
+}
+
+    .mapBoxCustom.active {
+        height: 250px;
+        visibility: visible;
+    }
+
+.mapBoxSearch {
+    display: flex;
+    justify-content: center;
+    height: 0px;
+    width: 120px;
+    position: absolute;
+    top: 10px;
+    left: 65px;
+    padding-top: 30px;
+    background-color: white;
+    transition: visibility .1s ease, width .5s ease, height .5s ease;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    visibility: hidden;
+}
+
+    .mapBoxSearch.active {
+        width: 500px;
+        height: 200px;
+        visibility: visible;
+    }
+
+.map-search::before {
+    content: "Tìm kiếm";
+    position: absolute;
+    left: 40px;
+    top: 0px;
+    width: 70px;
+    height: 30px;
+    padding: 5px 0;
+    visibility: hidden;
+    text-align: center;
+    font-size: 12px;
+    color: white;
+    background-color: rgb(150, 150, 150);
+    border-radius: 5px;
+    transition: visibility .1s ease;
+    z-index: 5;
+}
+
+.map-search::after {
+    content: "";
+    position: absolute;
+    left: 35px;
+    top: 10px;
+    width: 10px;
+    height: 10px;
+    visibility: hidden;
+    color: white;
+    background-color: rgb(150, 150, 150);
+    transform: rotate(45deg);
+    transition: visibility .1s ease;
+    z-index: 5;
+}
+
+.map-search:hover::before,
+.map-search:hover::after {
+    visibility: visible;
+}
+
+.mapBoxInfo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 570px;
+    width: 420px;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background-color: white;
+    transform: translateX(100%);
+    transition: visibility .2s ease, transform .5s ease;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    visibility: hidden;
+}
+
+    .mapBoxInfo.active {
+        transform: translateX(0%);
+        visibility: visible;
+    }
+
+    .mapBoxInfo.actived {
+        transform: translateX(102.5%);
+    }
+
+.mapBoxIcon {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 47.5%;
+    left: -8.5%;
+    border-radius: 5px;
+    background-color: white;
+    border: 1px gray #ddd;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .mapBoxIcon img {
+        transition: transform .5s ease;
+    }
+
+        .mapBoxIcon img.active {
+            transform: scaleX(-1);
+        }
+
+/*Hidden control select all page*/
+.dx-treelist-rowsview .dx-treelist-collapsed span:before {
+    font-family: FontAwesome;
+    content: "\f196";
+    background-color: white;
+}
+
+.mapBoxPanel {
+    display: flex;
+    justify-content: center;
+    height: 510px;
+    width: 350px;
+    position: absolute;
+    top: 11px;
+    left: 15px;
+    background-color: white;
+    transition: transform .5s ease;
+    border-radius: 4px;
+/*    border: 1px solid #ddd;*/
+    transform: translateX(-110%);
+    transition: transform .5s ease;
+}
+
+    .mapBoxPanel.active {
+        transform: translateX(0)
+    }
+
+.mapBoxPanelIcon {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 47%;
+    right: -10.5%;
+    border-radius: 5px;
+    background-color: white;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+    .mapBoxPanelIcon.active {
+        display: flex;
+    }
+
+.mapBoxPanel-icon {
+    position: absolute;
+    top: 0%;
+    right: -25%;
+    background-color: white;
+    padding: 6px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    transition: right .5s ease;
+}
+
+    .mapBoxPanel-icon.active {
+        right: -10.5%;
+    }
+
+.mapBoxPanel-icon-search,
+.mapBoxPanel-icon-info,
+.mapBoxPanel-icon-layer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 7.5px;
+    padding: 6px;
+    transition: background .5s ease;
+}
+
+    .mapBoxPanel-icon-search.active,
+    .mapBoxPanel-icon-info.active,
+    .mapBoxPanel-icon-layer.active {
+        background-color: rgb(51, 122, 183, 0.2);
+    }
+
+    .mapBoxPanel-icon-layer::after,
+    .mapBoxPanel-icon-info::after,
+    .mapBoxPanel-icon-search::after {
+        content: "";
+        position: absolute;
+        left: 45px;
+        top: 50px;
+        width: 10px;
+        height: 10px;
+        visibility: hidden;
+        color: white;
+        background-color: rgb(150, 150, 150);
+        transform: rotate(45deg);
+        z-index: 5;
+    }
+
+    .mapBoxPanel-icon-info::after {
+        top: 87px;
+    }
+
+    .mapBoxPanel-icon-search::after {
+        top: 15px;
+    }
+
+    .mapBoxPanel-icon-info::before {
+        content: "Chú thích bản đồ";
+        top: 77px;
+        width: 110px;
+    }
+
+    .mapBoxPanel-icon-search::before {
+        content: "Tìm kiếm";
+        top: 5px;
+        width: 70px;
+    }
+
+    .mapBoxPanel-icon-layer::before {
+        content: "Chuyên đề";
+        top: 40px;
+        width: 75px;
+    }
+
+    .mapBoxPanel-icon-info::before,
+    .mapBoxPanel-icon-layer::before,
+    .mapBoxPanel-icon-search::before {
+        position: absolute;
+        left: 50px;
+        height: 30px;
+        padding: 5px 0;
+        visibility: hidden;
+        text-align: center;
+        font-size: 12px;
+        color: white;
+        background-color: rgb(150, 150, 150);
+        border-radius: 5px;
+        z-index: 5;
+    }
+
+    .mapBoxPanel-icon-search:hover::before,
+    .mapBoxPanel-icon-layer:hover::before,
+    .mapBoxPanel-icon-info:hover::before,
+    .mapBoxPanel-icon-info:hover::after,
+    .mapBoxPanel-icon-layer:hover::after,
+    .mapBoxPanel-icon-search:hover::after {
+        visibility: visible;
+    }
+
+.dx-treelist-rowsview .dx-treelist-expanded span:before {
+    font-family: FontAwesome;
+    content: "\f147";
+    background-color: white;
+}
+
+.dx-treelist-rowsview .dx-treelist-empty-space {
+    margin-right: 7px;
+}
+
+.dx-treelist-rowsview .dx-line {
+    width: 14px;
+    height: 14px;
+}
+
+    .dx-treelist-rowsview .dx-line span {
+        font-size: 14px;
+        line-height: 14px;
+    }
+
+        .dx-treelist-rowsview .dx-line span:before {
+            width: 14px;
+            margin-top: -4px;
+            margin-left: -6px;
+        }
+
+    .dx-treelist-rowsview .dx-line:before {
+        visibility: visible;
+        content: "";
+        position: absolute;
+        left: 0px;
+        right: -4px;
+        top: -7px;
+        bottom: -11px;
+        background-image: url("../Images/treelist.png");
+        background-repeat: no-repeat;
+        background-position: 0px -30px;
+    }
+
+.dx-treelist-rowsview .dx-line-middle:before {
+    background-position-y: -9px;
+}
+
+.dx-treelist-rowsview .dx-line-last:before {
+    bottom: 4px;
+}
+
+.dx-treelist-headers .dx-cell-focus-disabled {
+    background-color: #509dd5;
+}
+
+.searchListItem:hover {
+    background-color: #509dd5 !important;
+    color: white !important;
+}
+
+.layerListItem:hover {
+    background-color: rgb(80, 157, 213, .5) !important;
+    color: white !important;
+}
+
+.dx-tag-container {
+    border-bottom: 1px solid #6ecfff !important;
+}
+
+/*.dx-texteditor-input {
+    border: none !important;
+}*/
+
+
+.buttonSuccess {
+    border: 1px solid #15a54a;
+    color: green;
+    background-color: transparent;
+    transition: color .3s ease, background-color .3s ease;
+    overflow: hidden;
+    padding: .7rem 1.6rem;
+    border-radius: .6rem;
+    text-decoration: none;
+}
+    .buttonSuccess:hover {
+        background-color: #15a54a;
+        color: white;
+        cursor: pointer;
+    }
+
+    .buttonSuccess:focus {
+        outline: none;
+    }
+
+    .buttonSuccess:active {
+        opacity: .8;
+        transform: translate(1px, 2px);
+    }
+
+.buttonNormal {
+    border: 1px solid gray;
+    color: gray;
+    background-color: transparent;
+    transition: color .3s ease, background-color .3s ease;
+    overflow: hidden;
+    padding: .7rem 1.6rem;
+    border-radius: .6rem;
+    text-decoration: none;
+}
+
+    .buttonNormal:hover {
+        background-color: gray;
+        color: white;
+        cursor: pointer;
+    }
+
+    .buttonNormal:focus {
+        outline: none;
+    }
+
+    .buttonNormal:active {
+        opacity: .8;
+        transform: translate(1px, 2px);
+    }

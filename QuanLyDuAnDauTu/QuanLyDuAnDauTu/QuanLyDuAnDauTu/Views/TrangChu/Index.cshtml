@@ -1,0 +1,369 @@
+﻿<div class="container">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <div id="bar"></div>
+        </div>
+        <div class="col-md-6">
+            <div id="line"></div>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <div id="pie"></div>
+        </div>
+        <div class="col-md-6">
+            <div id="barHor" style="height: 500px"></div>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <h2>Danh sách các hồ sơ đang xử lý, có góp ý, có quyết định</h2>
+    </div>
+
+    <div class="col-md-12">
+        <div id="gridContainer"></div>
+    </div>
+</div>
+
+
+
+
+<script>
+    const pieChartSource = [{
+        tinhChat: 'Tính Chất 1',
+        soDuAn: 12,
+    }, {
+        tinhChat: 'Tính Chất 2',
+        soDuAn: 7,
+    }, {
+        tinhChat: 'Tính Chất 3',
+        soDuAn: 20,
+    }, {
+        tinhChat: 'Tính chất 4',
+        soDuAn: 46,
+    }, {
+        tinhChat: 'Tính chất 5',
+        soDuAn: 28,
+    },];
+
+    const barChartSource = [{
+        state: 'Dự án 1',
+        dangXuLy: 103,
+        daXuLy: 223,
+    }, {
+        state: 'Dự án 2',
+        dangXuLy: 216,
+        daXuLy: 122,
+    }];
+
+    const lineChartSource = [{
+        mucDauTu: '>2 Tỷ',
+        duAn1: 3,
+        duAn2: 5,
+    }, {
+        mucDauTu: '2 - 5 Tỷ',
+        duAn1: 10,
+        duAn2: 7,
+    }, {
+        mucDauTu: '>10 Tỷ',
+        duAn1: 5,
+        duAn2: 12,
+        }];
+
+    const barChartSource2 = [{
+        state: 'Dự án 1',
+        dangXuLy: 103,
+        daXuLy: 223,
+    }, {
+        state: 'Dự án 2',
+        dangXuLy: 216,
+        daXuLy: 122,
+        }];
+
+    const gridData = [
+        { id: 1, name: "DuAn1", content: "...", date: new Date(2010, 1, 1), total: "....", state: "..." },
+        { id: 2, name: "DuAn2", content: "...", date: new Date(2010, 1, 1), total: "....", state: "..." }
+    ];
+
+
+    function InitExtreme() {
+        {
+            // Init PieChart
+            $('#pie').dxPieChart({
+                size: {
+                    width: 500,
+                },
+                palette: ['#FF6D60', '#F7D060', '#B7B7B7', '#98D8AA'],
+                dataSource: pieChartSource,
+                series: [
+                    {
+                        argumentField: 'tinhChat',
+                        valueField: 'soDuAn',
+                        label: {
+                            visible: true,
+                            connector: {
+                                visible: true,
+                                width: 1,
+                            },
+                        },
+                    },
+                ],
+                title: {
+                    text: "Tính Chất Dự Án",
+                    verticalAlignment: "bottom",
+                    horizontalAlignment: "center"
+                },
+                export: {
+                    enabled: true,
+                },
+                onPointClick(e) {
+                    const point = e.target;
+
+                    toggleVisibility(point);
+                },
+                onLegendClick(e) {
+                    const arg = e.target;
+
+                    toggleVisibility(this.getAllSeries()[0].getPointsByArg(arg)[0]);
+                },
+            });
+
+            function toggleVisibility(item) {
+                if (item.isVisible()) {
+                    item.hide();
+                } else {
+                    item.show();
+                }
+            }
+
+            // Init BarChart
+            $('#bar').dxChart({
+                dataSource: barChartSource,
+                palette: ['#FF6D60', '#98D8AA'],
+                commonSeriesSettings: {
+                    barPadding: 0,
+                    argumentField: 'state',
+                    type: 'bar',
+                    hoverMode: 'allArgumentPoints',
+                    selectionMode: 'allArgumentPoints',
+                    label: {
+                        visible: true,
+                        format: {
+                            type: 'fixedPoint',
+                            precision: 0,
+                        },
+                    },
+                },
+                series: [
+                    { valueField: 'dangXuLy', name: 'Đang xử lý' },
+                    { valueField: 'daXuLy', name: 'Đã xử lý' },
+                ],
+                title: {
+                    text: "Tình Hình Xử Lý Hồ Sơ",
+                    verticalAlignment: "bottom",
+                    horizontalAlignment: "center"
+                },
+                legend: {
+                    verticalAlignment: 'bottom',
+                    horizontalAlignment: 'center',
+                },
+                export: {
+                    enabled: true,
+                },
+                onPointClick(e) {
+                    e.target.select();
+                },
+            });
+
+            // Init LineChart
+            const chart = $('#line').dxChart({
+                palette: 'Violet',
+                dataSource: lineChartSource,
+                commonSeriesSettings: {
+                    argumentField: 'mucDauTu',
+                    type: 'line',
+                },
+                margin: {
+                    bottom: 20,
+                },
+                argumentAxis: {
+                    valueMarginsEnabled: false,
+                    discreteAxisDivisionMode: 'crossLabels',
+                    grid: {
+                        visible: true,
+                    },
+                },
+                series: [
+                    { valueField: 'duAn1', name: 'Dự Án 1' },
+                    { valueField: 'duAn2', name: 'Dự Án 2' },
+                ],
+                legend: {
+                    verticalAlignment: 'bottom',
+                    horizontalAlignment: 'center',
+                    itemTextPosition: 'bottom',
+                },
+                title: {
+                    text: 'Tổng Hợp Dự Toán Ngân Sách',
+                    horizontalAlignment: 'center',
+                    verticalAlignment: 'bottom',
+                },
+                export: {
+                    enabled: true,
+                },
+                tooltip: {
+                    enabled: true,
+                },
+            }).dxChart('instance');
+
+
+            // Horizontal Bar
+            $('#barHor').dxChart({
+                rotated: true,
+                dataSource: barChartSource2,
+                title: {
+                    text: 'Tình Hình Xử Lý Hồ Sơ',
+                    verticalAlignment: 'bottom',
+                },
+                export: {
+                    enabled: true,
+                },
+                legend: {
+                    horizontalAlignment: 'right',
+                },
+                commonSeriesSettings: {
+                    type: 'bar',
+                    barPadding: 0,
+                    label: {
+                        visible: true,
+                    },
+                    argumentField: 'state',
+                },
+                series: [{
+                    name: 'Đang xử lý',
+                    valueField: 'dangXuLy',
+                    color: '#1db2f5',
+                },
+                {
+                    name: 'Đã xử lý',
+                    valueField: 'daXuLy',
+                    color: '#f5564a',
+                }
+                ],
+                onPointClick(e) {
+
+
+                },
+                onLegendClick: function (e) {
+                    var series = e.target;
+                    if (series.isVisible()) {
+                        series.hide();
+                    } else {
+                        series.show();
+                    }
+                }
+            });
+
+
+           
+
+
+            $("#gridContainer").dxDataGrid({
+                dataSource: gridData,
+                showBorders: true,
+                showColumnLines: true,
+                wordWrapEnabled: true,
+                showRowLines: true,
+                remoteOperations: {
+                    filtering: true,
+                    paging: true,
+                    sorting: false,
+                    groupPaging: false,
+                    grouping: false,
+                    summary: true
+                },
+                selection: {
+                    mode: 'single',
+                    showCheckBoxesMode: 'always',
+                    selectAllMode: 'page',
+                },
+                grouping: {
+                    autoExpandAll: true,
+                },
+                columns: [
+                    {
+                        caption: 'Stt',
+                        width: '5%',
+                        alignment: 'center',
+                        dataField: 'id',
+                    },
+                    {
+                        caption: 'Tên dự án',
+                        width: '20%',
+                        alignment: 'left',
+                        dataField: 'name',
+                    },
+                    {
+                        caption: 'Nội dung và quy mô',
+                        width: '30%',
+                        alignment: 'left',
+                        dataField: 'content',
+                    },
+                    {
+                        caption: 'Thời gian thực hiện',
+                        width: '15%',
+                        alignment: 'left',
+                        dataField: 'date',
+                    },
+                    {
+                        caption: 'Tổng mức đầu tư',
+                        width: '15%',
+                        alignment: 'left',
+                        dataField: 'total',
+                    },
+                    {
+                        caption: 'Trạng thái',
+                        width: '10%',
+                        alignment: 'left',
+                        dataField: 'state',
+                    },
+                    {
+                        caption: 'Xử lý',
+                        width: '5%',
+                        alignment: 'center',
+                        cellTemplate: function (container, options) {
+
+                            var dataSource = [
+                                {
+                                    id: '1_1',
+                                    name: 'Xem'
+                                },
+                                {
+                                    id: '1_2',
+                                    name: 'Thu hổi'
+                                }
+                            ]
+
+                            var menuData = [{
+                                id: '1',
+                                name: '',
+                                icon: "/Images/setting.png",
+                                items: dataSource
+                            }];
+
+                            $("<div>").dxMenu({
+
+                                dataSource: menuData,
+                                displayExpr: 'name',
+                            }).css("text-align", "center").appendTo(container);
+                        }
+                    }
+                ],
+            });
+        }
+    }
+
+    $(document).ready(function () {
+        InitExtreme();
+    })
+</script>

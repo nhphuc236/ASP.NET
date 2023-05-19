@@ -1,0 +1,175 @@
+﻿<style>
+    label{
+        text-align: left !important;
+    }
+</style>
+
+<div class="panel panel-primary">
+    <div class="col-md-12">
+        <h1 class="TitleModule">
+            ĐỀ XUẤT NHU CẦU
+        </h1>
+    </div>
+
+    <div class="panel-body">
+        <div class="form-horizontal">
+            <div class="col-md-12">
+                <div class="col-md-12">
+
+                    <div class="col-md-12">
+                        <label class="col-md-2 control-label">Chủ đầu tư</label>
+                        <div class="col-md-4">
+                            <div id="selectChuDauTu"></div>
+                        </div>
+
+                        <label class="col-md-2 control-label">Tên dự án</label>
+                        <div class="col-md-4">
+                            <div id="txtTenDuAn"></div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-12">
+                        <label class="control-label col-md-2">Thời gian thực hiện</label>
+                        <div class="col-md-4">
+                            <div id="txtThoiGianThucHien"></div>
+                        </div>
+                        <div class="col-md-6" style="text-align: right; margin-top:10px;">
+                            <a>
+                                <img src="~/Images/save2.png" />
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12" style="text-align: center;">
+                        <a class="btn btn-default">
+                            <img src="~/Images/search.png" />
+                            Tìm kiếm
+                        </a>
+                    </div>
+
+                    <div class="col-md-12" style="margin-top:10px;">
+                        <div id="gridContainer"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    //-------------------------------
+    const _arrChuDauTu = ['Option 1', 'Option 2', 'Option 3'];
+    var data = [
+        { id: 1, name: "DuAn1", content: "...", date: "...", total: "....", },
+        { id: 2, name: "DuAn2", content: "...", date: "...", total: "....", }
+    ];
+
+    //-------------------------------
+    function InitExtreme() {
+        $('#selectChuDauTu').dxSelectBox({
+            placeholder: 'Chọn chủ đầu tư...',
+            items: _arrChuDauTu,
+        })
+
+        $('#txtTenDuAn').dxTextBox({}).dxTextBox('instance');
+        $('#txtThoiGianThucHien').dxTextBox({}).dxTextBox('instance');
+
+        $('#gridContainer').dxDataGrid({
+            dataSource: data,
+            showBorders: true,
+            showColumnLines: true,
+            wordWrapEnabled: true,
+            showRowLines: true,
+            remoteOperations: {
+                filtering: true,
+                paging: true,
+                sorting: false,
+                groupPaging: false,
+                grouping: false,
+                summary: true
+            },
+            selection: {
+                mode: 'single',
+                showCheckBoxesMode: 'always',
+                selectAllMode: 'page',
+            },
+            grouping: {
+                autoExpandAll: true,
+            },
+            columns: [
+                {
+                    caption: 'Stt',
+                    width: '5%',
+                    alignment: 'center',
+                    dataField: 'id',
+                },
+                {
+                    caption: 'Tên dự án',
+                    width: '30%',
+                    alignment: 'left',
+                    dataField: 'name',
+                },
+                {
+                    caption: 'Nội dung và quy mô',
+                    width: '35%',
+                    alignment: 'left',
+                    dataField: 'content',
+                },
+                {
+                    caption: 'Thời gian thực hiện',
+                    width: '10%',
+                    alignment: 'left',
+                    dataField:'date',
+                },
+                {
+                    caption: 'Tổng mức đầu tư',
+                    width: '15%',
+                    alignment: 'left',
+                    dataField: 'total',
+                },
+                {
+                    caption: 'Xử lý',
+                    width: '5%',
+                    alignment: 'center',
+                    cellTemplate: function (container, options) {
+
+                        var dataSource = [
+                            {
+                                id: '1_1',
+                                name: 'Sửa',
+                                icon: "/Images/edit2.png",
+                            },
+                        ]
+
+                        var menuData = [{
+                            id: '1',
+                            name: '',
+                            icon: "/Images/setting.png",
+                            items: dataSource
+                        }];
+
+                        $("<div>").dxMenu({
+
+                            dataSource: menuData,
+                            displayExpr: 'name',
+                            onItemClick: function (e) {
+                                var id = e.itemData.id;
+
+                                if (id === '1_1') {
+                                }
+
+                            }
+                        }).css("text-align", "center").appendTo(container);
+                    }
+                }
+            ],
+        })
+    }
+
+    //-------------------------------
+    $(document).ready(function () {
+        InitExtreme();
+    })
+</script>

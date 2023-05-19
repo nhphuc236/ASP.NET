@@ -1,0 +1,693 @@
+﻿
+<style>
+    .label-group-header {
+        text-align: left !important;
+        font-size: large;
+        margin-top: 10px;
+        margin-bottom: 10px !important;
+        background: rgb(80,157,213);
+    }
+
+    label{
+        text-align: left !important;
+    }
+    .dx-textarea.dx-state-disabled {
+        opacity: 1;
+    }
+</style>
+
+<div class="panel panel-primary">
+    <div class="col-md-12">
+        <h1 class="TitleModule">
+            TẠO DỰ ÁN
+        </h1>
+    </div>
+
+    <div class="panel-body">
+        <div class="form-horizontal">
+            <div class="col-md-12">
+                <div class="col-md-12 duan">
+
+                    <div class="col-md-12">
+                        <label class="col-md-2 control-label required">Đơn vị thực hiện</label>
+                        <div class="col-md-4">
+                            <div id="selectChuDauTu"></div>
+                        </div>
+
+                        @*<div class="col-md-2">
+                            <label class="control-label col-md-12">Mã dự án</label>
+                        </div>*@
+
+                        @*<div class="col-md-4">
+                            <div id="txtMaDuAn"></div>
+                        </div>*@
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="col-md-2 control-label required">Tên dự án</label>
+                        <div class="col-md-10">
+                            <div id="txtTenDuAn"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="col-md-2 control-label">Mục tiêu dự án</label>
+                        <div class="col-md-10">
+                            <div id="txtMucTieuDuAn" class="textboxMode"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="col-md-2 control-label required">Nội dung và quy mô đầu tư</label>
+                        <div class="col-md-10">
+                            <div id="txtNoiDungVaQuyMoDauTu" class="textboxMode"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="col-md-12 control-label label-group-header">ĐỊA ĐIỂM ĐẦU TƯ</label>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="control-label col-md-2 required">Tỉnh/Thành</label>
+
+                        <div class="col-md-4">
+                            <div id="selectTinhThanh"></div>
+                        </div>
+
+                        <label class="control-label col-md-2 required">Quận/Huyện</label>
+
+                        <div class="col-md-4">
+                            <div id="selectQuanHuyen"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="control-label col-md-2 required">Phường/Xã</label>
+                        <div class="col-md-4">
+                            <div id="selectPhuongXa"></div>
+                        </div>
+
+                         <label class="control-label col-md-2 required">Số đường</label>
+
+                        <div class="col-md-4">
+                            <div id="txtSoDuong"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="control-label col-md-2">Địa chỉ</label>
+                        <div class="col-md-10">
+                            <div id="txtDiaChi" class="textboxMode"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="col-md-2 control-label">Nguồn vốn đầu tư</label>
+                        <div class="col-md-4">
+                            <div id="selectNguonVon"></div>
+                        </div>
+
+                        <label class="col-md-2 control-label">Hình thức QLDA</label>
+                        <div class="col-md-4">
+                            <div id="selectHinhThucQLDA"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="col-md-2 control-label required">Thời gian thực hiện từ</label>
+
+                        <div class="col-md-2">
+                            <div id="dateTu"></div>
+                        </div>
+
+                        <label class="control-label col-md-2 col-md-offset-2 required">Đến</label>
+
+                        <div class="col-md-2">
+                            <div id="dateDen"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="col-md-2 control-label">Phân nhóm DA</label>
+                        <div class="col-md-4">
+                            <div id="selectPhanNhomDA"></div>
+                        </div>
+
+                        <label class="col-md-2 control-label">Phân loại DA</label>
+                        <div class="col-md-4">
+                            <div id="selectPhanLoaiDA"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="col-md-2 control-label">Tính chất DA CNTT</label>
+                        <div class="col-md-4">
+                            <div id="selectTinhChatDA"></div>
+                        </div>
+
+                        <label class="col-md-2 control-label">Phân nhóm CNTT</label>
+                        <div class="col-md-4">
+                            <div id="selectPhanNhomCNTT"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="col-md-2 control-label required">Tổng mức đầu tư</label>
+                        <div class="col-md-4">
+                            <div id="txtTongMucDauTu" class="textboxMode"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="col-md-12 control-label label-group-header">CHI PHÍ</label>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="col-md-2 control-label">Chi phí xây lắp</label>
+                        <div class=" = col-md-4">
+                            <div id="txtChiPhiXayLap" class="textboxMode"></div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <label class="control-label col-md-12">Chi phí thiết bị</label>
+                        </div>
+                        <div class="col-md-4">
+                            <div id="txtChiPhiThietBi" class="textboxMode"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="control-label col-md-2">Chi phí QLDA</label>
+                        <div class="col-md-4">
+                            <div id="txtChiPhiQLDA" class="textboxMode"></div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <label class="control-label col-md-12">Chi phí tư vấn</label>
+                        </div>
+                        <div class="col-md-4">
+                            <div id="txtChiPhiTuVan" class="textboxMode"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="control-label col-md-2">Chi phí khác</label>
+                        <div class="col-md-4">
+                            <div id="txtChiPhiKhac" class="textboxMode"></div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <label class="control-label col-md-12">Chi phí dự phòng</label>
+                        </div>
+                        <div class="col-md-4">
+                            <div id="txtChiPhiDuPhong" class="textboxMode"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="col-md-2 control-label">Văn bản pháp lý</label>
+                        <div class="col-md-4">
+                            <div id="txtVanBanPhapLy" class="textboxMode"></div>
+                        </div>
+                        <div class="col-md-2">
+                            <a class="btn btn-default btn_w">
+                                Đính kèm
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- DataGrid of Files -->
+
+                    <div class="col-md-12" style="margin-top: 20px;">
+                        <div class="col-md-10 col-md-offset-2">
+                            <div id="gridContainer"></div>
+                        </div>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="col-md-12" style="text-align: center; margin-top: 20px;">
+                        <ul>
+
+                            @if (ViewBag.Skin == null && ViewBag.Id == null)
+                            {
+                                <li style="display: inline; margin-right: 10px">
+                                    <a class="btn btn-default" style="width: 60px;" id="btnLuu" onclick="sendPost()">
+                                        <img src="~/Images/save1.png" />
+                                        Lưu
+                                    </a>
+                                </li>
+                            }
+                            else if (ViewBag.Skin == null && ViewBag.Id != null)
+                            {
+                                <li style="display: inline; margin-right: 10px">
+                                    <a class="btn btn-default btn_w" id="btnCapNhat" onclick="sendPost()">
+                                        <img src="~/Images/save1.png" />
+                                        Cập nhật
+                                    </a>
+                                </li>
+                            }
+                            else if (ViewBag.Skin == "1" && ViewBag.Id != null)
+                            {
+                                // No Button
+                            }
+
+                            <li style="display: inline; margin-right: 10px">
+                                <a class="btn btn-default" style="width: 60px;">
+                                    <img src="~/Images/delete.png" />
+                                    Xóa
+                                </a>
+                            </li>
+                            <li style="display: inline; margin-right: 10px">
+                                <a class="btn btn-default btn_w" onclick="changeUrl(urlToTrinh)">
+                                    <img src="~/Images/document.png" />
+                                    Tờ trình
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" id="hdId" value="@ViewBag.Id" />
+
+<script>
+
+    var urlToTrinh = '@Html.Raw(Url.Action("ToTrinh", "DuAn"))';
+
+    //--------------------------------------------------------------
+    function changeUrl(url) {
+        window.location.href = url;
+    }
+
+    //--------------------------------------------------------------
+    var _arrChuDauTu = SendRequest('http://localhost:8083/api/DanhMuc/GetAllDonViDauTu');
+  
+    var _arrTinhThanh = SendRequest('http://localhost:8083/api/DanhMuc/GetAllTinhThanh');
+
+    var _arrNguonVon = SendRequest('http://localhost:8083/api/DanhMuc/GetAllNguonVon');
+
+    var _arrHinhThucQLDA = SendRequest('http://localhost:8083/api/DanhMuc/GetAllHinhThucQuanLyDuAn');
+
+    var _arrPhanNhomCNTT = SendRequest('http://localhost:8083/api/DanhMuc/GetAllPhanNhomCntt');
+
+    var _arrPhanNhomDA = SendRequest('http://localhost:8083/api/DanhMuc/GetAllNhomDuAn');
+
+    var _arrPhanLoaiDA = SendRequest('http://localhost:8083/api/DanhMuc/GetAllLoaiDauTu');
+
+    var _arrTinhChatDA = SendRequest('http://localhost:8083/api/DanhMuc/GetAllTinhChatCntt');
+
+    //--------------------------------------------------------------
+    function sendPost() {
+
+        var id = $('#hdId').val();
+        var url;
+        var data;
+
+        console.log($('#txtTenDuAn').dxTextBox('option', 'value'));
+        var duan = document.querySelector(".duan");
+        if (ValidateData(duan)) {
+            if (id.trim().length > 1) {
+                // == 1 : Read-Only mode
+                // == 0 : Write mode
+                data = {
+                    id: $('#hdId').val(),
+                    chuDauTuID: $('#selectChuDauTu').dxSelectBox('instance').option('value'),
+                    tenDuAn: $('#txtTenDuAn').dxTextBox('instance').option('value'),
+                    mucTieuDuAn: $('#txtMucTieuDuAn').dxTextArea('instance').option('value'),
+                    noiDungVaQuyMo: $('#txtNoiDungVaQuyMoDauTu').dxTextArea('instance').option('value'),
+                    tinhThanhID: $('#selectTinhThanh').dxSelectBox('instance').option('value'),
+                    quanHuyenID: $('#selectQuanHuyen').dxSelectBox('instance').option('value'),
+                    phuongXaID: $('#selectPhuongXa').dxSelectBox('instance').option('value'),
+                    soDuong: $('#txtSoDuong').dxTextBox('instance').option('value'),
+                    diaChi: $('#txtDiaChi ').dxTextArea('instance').option('value'),
+                    nguonVonID: $('#selectNguonVon').dxSelectBox('instance').option('value'),
+                    hinhThucQuanLyDuAnID: $('#selectHinhThucQLDA').dxSelectBox('instance').option('value'),
+                    thucHienTuNgay: $('#dateTu').dxDateBox('instance').option('value'),
+                    thucHienDenNgay: $('#dateDen').dxDateBox('instance').option('value'),
+                    phanNhomCNTTID: $('#selectPhanNhomCNTT').dxSelectBox('instance').option('value'),
+                    phanNhomDuAnID: $('#selectPhanNhomDA').dxSelectBox('instance').option('value'),
+                    phanLoaiDuAnID: $('#selectPhanLoaiDA').dxSelectBox('instance').option('value'),
+                    tinhChatDuAnID: $('#selectTinhChatDA').dxSelectBox('instance').option('value'),
+                    tongMucDauTu: $('#txtTongMucDauTu').dxTextBox('instance').option('value'),
+                    chiPhiXayLap: $('#txtChiPhiXayLap').dxTextBox('instance').option('value') === '' ? null : $('#txtChiPhiXayLap').dxTextBox('option', 'value'),
+                    chiPhiThietBi: $('#txtChiPhiThietBi').dxTextBox('instance').option('value') === '' ? null : $('#txtChiPhiThietBi').dxTextBox('option', 'value'),
+                    chiPhiQuanLyDuAn: $('#txtChiPhiQLDA').dxTextBox('instance').option('value') === '' ? null : $('#txtChiPhiQLDA').dxTextBox('option', 'value'),
+                    chiPhiTuVan: $('#txtChiPhiTuVan').dxTextBox('instance').option('value') === '' ? null : $('#txtChiPhiTuVan').dxTextBox('option', 'value'),
+                    chiPhiKhac: $('#txtChiPhiKhac').dxTextBox('instance').option('value') === '' ? null : $('#txtChiPhiKhac').dxTextBox('option', 'value'),
+                    chiPhiDuPhong: $('#txtChiPhiDuPhong').dxTextBox('instance').option('value') === '' ? null : $('#txtChiPhiDuPhong').dxTextBox('option', 'value'),
+                };
+
+                url = 'http://localhost:8083/api/DuAn/UpdateDuAn';
+            }
+            else if (id.trim().length === 0) {
+                data = {
+                    //maDuAn: $('#txtMaDuAn').dxTextBox('instance').option('value'),
+                    chuDauTuID: $('#selectChuDauTu').dxSelectBox('instance').option('value'),
+                    tenDuAn: $('#txtTenDuAn').dxTextBox('instance').option('value'),
+                    mucTieuDuAn: $('#txtMucTieuDuAn').dxTextArea('instance').option('value'),
+                    noiDungVaQuyMo: $('#txtNoiDungVaQuyMoDauTu').dxTextArea('instance').option('value'),
+                    tinhThanhID: $('#selectTinhThanh').dxSelectBox('instance').option('value'),
+                    quanHuyenID: $('#selectQuanHuyen').dxSelectBox('instance').option('value'),
+                    phuongXaID: $('#selectPhuongXa').dxSelectBox('instance').option('value'),
+                    soDuong: $('#txtSoDuong').dxTextBox('instance').option('value'),
+                    diaChi: $('#txtDiaChi ').dxTextArea('instance').option('value'),
+                    nguonVonID: $('#selectNguonVon').dxSelectBox('instance').option('value'),
+                    hinhThucQuanLyDuAnID: $('#selectHinhThucQLDA').dxSelectBox('instance').option('value'),
+                    thucHienTuNgay: $('#dateTu').dxDateBox('instance').option('value'),
+                    thucHienDenNgay: $('#dateDen').dxDateBox('instance').option('value'),
+                    phanNhomCNTTID: $('#selectPhanNhomCNTT').dxSelectBox('instance').option('value'),
+                    phanNhomDuAnID: $('#selectPhanNhomDA').dxSelectBox('instance').option('value'),
+                    phanLoaiDuAnID: $('#selectPhanLoaiDA').dxSelectBox('instance').option('value'),
+                    tinhChatDuAnID: $('#selectTinhChatDA').dxSelectBox('instance').option('value'),
+                    tongMucDauTu: $('#txtTongMucDauTu').dxTextBox('instance').option('value'),
+                    chiPhiXayLap: $('#txtChiPhiXayLap').dxTextBox('instance').option('value') === '' ? null : $('#txtChiPhiXayLap').dxTextBox('option','value'),
+                    chiPhiThietBi: $('#txtChiPhiThietBi').dxTextBox('instance').option('value') === '' ? null : $('#txtChiPhiThietBi').dxTextBox('option', 'value'),
+                    chiPhiQuanLyDuAn: $('#txtChiPhiQLDA').dxTextBox('instance').option('value') === '' ? null : $('#txtChiPhiQLDA').dxTextBox('option', 'value'),
+                    chiPhiTuVan: $('#txtChiPhiTuVan').dxTextBox('instance').option('value') === '' ? null : $('#txtChiPhiTuVan').dxTextBox('option', 'value'),
+                    chiPhiKhac: $('#txtChiPhiKhac').dxTextBox('instance').option('value') === '' ? null : $('#txtChiPhiKhac').dxTextBox('option', 'value'),
+                    chiPhiDuPhong: $('#txtChiPhiDuPhong').dxTextBox('instance').option('value') === '' ? null : $('#txtChiPhiDuPhong').dxTextBox('option', 'value'),
+                };
+
+                url = 'http://localhost:8083/api/DuAn/PostProject';
+            }
+
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                headers: {
+                    "accept": "*/*",
+                    "Content-Type": "application/json"
+                },
+                data: JSON.stringify(data),
+                success: function (response, status, xhr) {
+                    console.log("Success! Response code: " + xhr.status);
+                    Notification('success', 'Thông báo', 'Lưu thành công');
+                },
+                error: function (xhr, status, error) {
+                    console.log("Error: " + error);
+                }
+            })
+        }
+    }
+
+    //--------------------------------------------------------------
+
+    function InitExtreme() {
+
+        const now = new Date();
+
+         $('#selectChuDauTu').dxSelectBox({
+            placeholder: 'Chọn chủ đầu tư...',
+            items: _arrChuDauTu,
+            valueExpr: 'donViId',
+            displayExpr:'tenDonVi',
+        });
+        //$('#txtMaDuAn').dxTextBox({ required: true }).dxTextBox('instance');
+
+        $('#txtTenDuAn').dxTextBox({
+            onValueChanged(e) {
+                console.log(e);
+            }
+        }).dxTextBox('instance');
+
+        $('#txtMucTieuDuAn').dxTextArea({
+            height: 90,
+        }).dxTextArea('instance');
+
+        $('#txtNoiDungVaQuyMoDauTu').dxTextArea({
+            height: 90,
+        }).dxTextArea('instance');
+
+        $('#selectTinhThanh').dxSelectBox({
+            placeholder: 'Chọn Tỉnh/Thành...',
+            items: _arrTinhThanh,
+            valueExpr: "tinhThanhId",
+            displayExpr: "tenTinhThanh",
+            onValueChanged(e) {
+                var _arrQuanHuyen = SendRequest('http://localhost:8083/api/DanhMuc/GetQuanHuyenByTinhThanhId?id=' + e.value);
+                    
+                if (_arrQuanHuyen != null) {
+                    $('#selectQuanHuyen').dxSelectBox('instance').option('items', _arrQuanHuyen);
+                }
+
+                updateDiaChi();
+            }
+        });
+
+         selectQuanHuyen = $('#selectQuanHuyen').dxSelectBox({
+            placeholder: 'Chọn Quận/Huyện...',
+            items: [],
+            valueExpr: 'quanHuyenId',
+            displayExpr: 'tenQuanHuyen',
+            onValueChanged(e) {
+                var _arrPhuongXa = SendRequest('http://localhost:8083/api/DanhMuc/GetPhuongXaByQuanHuyenId?id=' + e.value);
+
+                if (_arrPhuongXa != null) {
+                    $('#selectPhuongXa').dxSelectBox('instance').option('items', _arrPhuongXa);
+                }
+
+                updateDiaChi();
+            }
+        }).dxSelectBox('instance');
+
+        selectPhuongXa = $('#selectPhuongXa').dxSelectBox({
+            placeholder: 'Chọn Phường/Xã...',
+            items: [],
+            valueExpr: 'phuongXaId',
+            displayExpr: 'tenPhuongXa',
+            onValueChanged(e) {
+                updateDiaChi();
+            }
+        }).dxSelectBox('instance');
+
+        $('#txtSoDuong').dxTextBox({
+            onValueChanged(e) {
+                updateDiaChi();
+            }
+        });
+
+        $('#txtDiaChi').dxTextArea({
+            height: 90,
+            disabled: true,
+        }).dxTextArea('instance');
+
+        $('#selectNguonVon').dxSelectBox({
+            placeholder: 'Chọn nguồn vốn đầu tư...',
+            items: _arrNguonVon,
+            valueExpr: 'nguonVonId',
+            displayExpr: 'tenNguonVon',
+        });
+
+        $('#selectHinhThucQLDA').dxSelectBox({
+            placeholder: 'Chọn hình thức QLDA...',
+            items: _arrHinhThucQLDA,
+            valueExpr: 'hinhThucQldaId',
+            displayExpr: 'tenHinhThucQlda',
+        });
+
+        $('#dateTu').dxDateBox({
+            type: 'date',
+            value: now,
+            displayFormat: 'dd/MM/yyyy',
+        });
+
+        $('#dateDen').dxDateBox({
+            type: 'date',
+            value: now,
+            displayFormat: 'dd/MM/yyyy',
+        });
+
+        $('#selectPhanNhomCNTT').dxSelectBox({
+            placeholder: 'Chọn phân nhóm CNTT...',
+            items: _arrPhanNhomCNTT,
+            valueExpr: 'phanNhomCnttId',
+            displayExpr: 'tenPhanNhomCntt',
+        });
+
+        $('#selectPhanNhomDA').dxSelectBox({
+            placeholder: 'Chọn hình thức phân nhóm DA...',
+            items: _arrPhanNhomDA,
+            valueExpr: 'nhomDuAnId',
+            displayExpr: 'tenNhomDuAn',
+        });
+
+        $('#selectPhanLoaiDA').dxSelectBox({
+            placeholder: 'Chọn phân loại dự án...',
+            items: _arrPhanLoaiDA,
+            valueExpr: 'loaiDauTuId',
+            displayExpr: 'tenLoaiDauTu',
+        });
+
+        $('#selectTinhChatDA').dxSelectBox({
+            placeholder: 'Chọn tính chất dự án...',
+            items: _arrTinhChatDA,
+            valueExpr: 'tinhChatId',
+            displayExpr: 'tenTinhChat',
+        });
+
+        $('#txtTongMucDauTu').dxTextBox({}).dxTextBox('instance');
+
+        $('#txtChiPhiXayLap').dxTextBox({}).dxTextBox('instance');
+
+        $('#txtChiPhiThietBi').dxTextBox({}).dxTextBox('instance');
+
+        $('#txtChiPhiQLDA').dxTextBox({}).dxTextBox('instance');
+
+        $('#txtChiPhiTuVan').dxTextBox({}).dxTextBox('instance');
+
+        $('#txtChiPhiKhac').dxTextBox({}).dxTextBox('instance');
+
+        $('#txtChiPhiDuPhong').dxTextBox({}).dxTextBox('instance');
+
+        $('#txtVanBanPhapLy').dxTextBox({}).dxTextBox('instance');
+
+        // Danh sách Files
+        $('#gridContainer').dxDataGrid({
+            dataSource: CustomStoreData() ?? [],
+            showBorders: true,
+            showColumnLines: true,
+            wordWrapEnabled: true,
+            showRowLines: true,
+            remoteOperations: {
+                filtering: true,
+                paging: true,
+                sorting: false,
+                groupPaging: false,
+                grouping: false,
+                summary: true
+            },
+            selection: {
+                mode: 'single',
+                showCheckBoxesMode: 'always',
+                selectAllMode: 'page',
+            },
+            grouping: {
+                autoExpandAll: true,
+            },
+            columns: [
+                {
+                    caption: 'Stt',
+                    width: '10%',
+                    alignment: 'center',
+                    dataField: 'ID',
+                },
+                {
+                    caption: 'Tên file',
+                    width: '80%',
+                    alignment: 'left',
+                    dataField: "tenFile",
+                    //allowSorting: false
+                },
+                {
+                    caption: 'Tải',
+                    width: '5%',
+                    alignment: 'center',
+                    cellTemplate: function (container, options) {
+                        $("<div>").append($("<img>", {
+                            "class": "clsbtnCursor",
+                            "src": "/Images/attachment.png",
+                        })).appendTo(container);
+                    }
+                },
+                {
+                    caption: 'Xóa',
+                    width: '5%',
+                    alignment: 'center',
+                    cellTemplate: function (container, options) {
+                        $("<div>").append($("<img>", {
+                            "class": "clsbtnCursor",
+                            "src": "/Images/delete.png",
+                        })).on('dxclick', function () {
+                            $('#gridContainer').dxDataGrid('instance').deleteRow(options.rowIndex);
+                        }).appendTo(container);
+                    }
+                },
+            ]
+        })
+    }
+    //--------------------------------------------------------------
+    function updateDiaChi() {
+        var soDuong = $('#txtSoDuong').dxTextBox('instance').option('value');
+        var phuongXa = $('#selectPhuongXa').dxSelectBox('instance').option('text');
+        var quanHuyen = $('#selectQuanHuyen').dxSelectBox('instance').option('text');
+        var tinhThanh = $('#selectTinhThanh').dxSelectBox('instance').option('text')
+
+        var text = soDuong + ', ' + phuongXa + ', ' + quanHuyen + ', ' + tinhThanh;
+
+        $('#txtDiaChi').dxTextArea('instance').option('value', text);
+    }
+
+    //--------------------------------------------------------------
+    function CustomStoreData() {
+        var dataSource = new DevExpress.data.CustomStore({
+            load: function (loadOptions) {
+                var deferred = $.Deferred();
+                var ent = {};
+                data = [{ ID: '1', tenFile: "File 1", TotalRecords: 2 }, { ID: '2', tenFile: "File 2" }];
+                deferred.resolve(data, { totalCount: data[0].TotalRecords });
+
+                return deferred.promise();
+            },
+            remove(key) {
+                if (!isEmpty(key)) {
+                    /* SendRequest('Chusohuu/SoftDelete?id=' + key.id)*/
+                }
+            }
+        });
+
+        return dataSource;
+    }
+
+
+    //--------------------------------------------------------------
+
+    function LoadDuAn(id) {
+
+        var data = SendRequest('http://localhost:8083/api/DuAn/GetProjectById?id=' + id);
+        console.log(data);
+
+        $('#selectChuDauTu').dxSelectBox('instance').option('value', data.chuDauTuID);
+        $('#txtTenDuAn').dxTextBox('instance').option('value', data.tenDuAn);
+        $('#txtMucTieuDuAn').dxTextArea('instance').option('value', data.mucTieuDuAn);
+        $('#txtNoiDungVaQuyMoDauTu').dxTextArea('instance').option('value', data.noiDungVaQuyMo);
+        $('#selectTinhThanh').dxSelectBox('instance').option('value', data.tinhThanhID);
+        $('#selectQuanHuyen').dxSelectBox('instance').option("value", data.quanHuyenID);
+        $('#selectPhuongXa').dxSelectBox('instance').option("value", data.phuongXaID);
+        $('#txtSoDuong').dxTextBox('instance').option('value', data.soDuong),
+        $('#txtDiaChi ').dxTextArea('instance').option('value', data.diaChi);
+        $('#selectNguonVon').dxSelectBox('instance').option('value', data.nguonVonID);
+        $('#selectHinhThucQLDA').dxSelectBox('instance').option('value', data.hinhThucQuanLyDuAnID);
+        $('#dateTu').dxDateBox('instance').option('value', data.thucHienTuNgay);
+        $('#dateDen').dxDateBox('instance').option('value', data.thucHienDenNgay);
+        $('#selectPhanNhomCNTT').dxSelectBox('instance').option('value', data.phanNhomCNTTID);
+        $('#selectPhanNhomDA').dxSelectBox('instance').option('value', data.phanNhomDuAnID);
+        $('#selectPhanLoaiDA').dxSelectBox('instance').option('value', data.phanLoaiDuAnID);
+        $('#selectTinhChatDA').dxSelectBox('instance').option('value', data.tinhChatDuAnID);
+        $('#txtTongMucDauTu').dxTextBox('instance').option('value', data.tongMucDauTu);
+        $('#txtChiPhiXayLap').dxTextBox('instance').option('value', data.chiPhiXayLap);
+        $('#txtChiPhiThietBi').dxTextBox('instance').option('value', data.chiPhiThietBi);
+        $('#txtChiPhiQLDA').dxTextBox('instance').option('value', data.chiPhiQuanLyDuAn);
+        $('#txtChiPhiTuVan').dxTextBox('instance').option('value', data.chiPhiTuVan);
+        $('#txtChiPhiKhac').dxTextBox('instance').option('value', data.chiPhiKhac);
+        $('#txtChiPhiDuPhong').dxTextBox('instance').option('value', data.chiPhiDuPhong);
+    }
+
+    //--------------------------------------------------------------
+    $(document).ready(function () {
+        InitExtreme();
+
+        var id = $('#hdId').val();
+
+        if (id.trim().length != 0) {
+            // == 1 : Read-Only mode
+            // == 0 : Write mode
+            LoadDuAn(id);
+        }
+    })
+</script>
